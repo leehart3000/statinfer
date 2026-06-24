@@ -1,0 +1,22 @@
+{
+  "name": "statinfer",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leehart3000/statinfer.git"
+  },
+  "keywords": ["statistics", "inference"],
+  "author": "Lee Hart",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/leehart3000/statinfer/issues"
+  },
+  "homepage": "https://github.com/leehart3000/statinfer#readme"
+}
