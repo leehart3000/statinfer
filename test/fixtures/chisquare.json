@@ -1,0 +1,108 @@
+{
+  "generatedWith": {
+    "scipy": "1.18.1"
+  },
+  "cases": [
+    {
+      "name": "independence, 2x2, correction=True",
+      "input": {
+        "table": [
+          [
+            12,
+            5
+          ],
+          [
+            7,
+            16
+          ]
+        ],
+        "correction": true
+      },
+      "expected": {
+        "statistic": 4.812286470652336,
+        "pValue": 0.02825752852636125,
+        "df": 1
+      }
+    },
+    {
+      "name": "independence, 2x2, correction=False",
+      "input": {
+        "table": [
+          [
+            12,
+            5
+          ],
+          [
+            7,
+            16
+          ]
+        ],
+        "correction": false
+      },
+      "expected": {
+        "statistic": 6.319891801114041,
+        "pValue": 0.011939091377912247,
+        "df": 1
+      }
+    },
+    {
+      "name": "independence, 2x3, correction=True",
+      "input": {
+        "table": [
+          [
+            20,
+            15,
+            25
+          ],
+          [
+            30,
+            25,
+            10
+          ]
+        ],
+        "correction": true
+      },
+      "expected": {
+        "statistic": 10.74576465201465,
+        "pValue": 0.004640735900808558,
+        "df": 2
+      }
+    },
+    {
+      "name": "goodness-of-fit, [18, 22, 30, 30], proportions=equal",
+      "input": {
+        "observed": [
+          18,
+          22,
+          30,
+          30
+        ]
+      },
+      "expected": {
+        "statistic": 4.32,
+        "pValue": 0.22891886433610517,
+        "df": 3
+      }
+    },
+    {
+      "name": "goodness-of-fit, [45, 35, 20], proportions=[0.5, 0.3, 0.2]",
+      "input": {
+        "observed": [
+          45,
+          35,
+          20
+        ],
+        "expectedProportions": [
+          0.5,
+          0.3,
+          0.2
+        ]
+      },
+      "expected": {
+        "statistic": 1.3333333333333335,
+        "pValue": 0.5134171190325921,
+        "df": 2
+      }
+    }
+  ]
+}

@@ -166,6 +166,9 @@ importers:
 
   .:
     dependencies:
+      '@stdlib/math-base-special-gammainc':
+        specifier: ^0.3.1
+        version: 0.3.1
       '@stdlib/stats-base-dists-normal-cdf':
         specifier: ^0.3.1
         version: 0.3.1

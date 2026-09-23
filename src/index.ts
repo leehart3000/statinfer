@@ -3,4 +3,10 @@ export { tTest } from "./ttest.js";
 export type { TTestOptions } from "./ttest.js";
 export { proportionTest } from "./proportion.js";
 export type { ProportionTestOptions } from "./proportion.js";
+export { chiSquareTest } from "./chisquare.js";
+export type {
+  ChiSquareTestOptions,
+  ChiSquareIndependenceOptions,
+  ChiSquareGoodnessOfFitOptions,
+} from "./chisquare.js";
 export type { Alternative, TestResult } from "./types.js";

@@ -132,3 +132,47 @@ prop_output = {
 }
 (OUT_DIR / "proportion.json").write_text(json.dumps(prop_output, indent=2, allow_nan=False) + "\n")
 print(f"Wrote {len(prop_cases)} cases to {OUT_DIR / 'proportion.json'}")
+
+
+# --- Chi-square tests ------------------------------------------------------
+
+chi_cases = []
+
+for table, correction in [
+    ([[12, 5], [7, 16]], True),
+    ([[12, 5], [7, 16]], False),
+    ([[20, 15, 25], [30, 25, 10]], True),
+]:
+    res = stats.chi2_contingency(table, correction=correction)
+    chi_cases.append({
+        "name": f"independence, {len(table)}x{len(table[0])}, correction={correction}",
+        "input": {"table": table, "correction": correction},
+        "expected": {
+            "statistic": float(res.statistic),
+            "pValue": float(res.pvalue),
+            "df": int(res.dof),
+        },
+    })
+
+for observed, proportions in [
+    ([18, 22, 30, 30], None),
+    ([45, 35, 20], [0.5, 0.3, 0.2]),
+]:
+    f_exp = None if proportions is None else np.array(proportions) * sum(observed)
+    res = stats.chisquare(observed, f_exp=f_exp)
+    case_input = {"observed": observed}
+    if proportions is not None:
+        case_input["expectedProportions"] = proportions
+    chi_cases.append({
+        "name": f"goodness-of-fit, {observed}, proportions={proportions or 'equal'}",
+        "input": case_input,
+        "expected": {
+            "statistic": float(res.statistic),
+            "pValue": float(res.pvalue),
+            "df": len(observed) - 1,
+        },
+    })
+
+chi_output = {"generatedWith": {"scipy": scipy.__version__}, "cases": chi_cases}
+(OUT_DIR / "chisquare.json").write_text(json.dumps(chi_output, indent=2, allow_nan=False) + "\n")
+print(f"Wrote {len(chi_cases)} cases to {OUT_DIR / 'chisquare.json'}")
