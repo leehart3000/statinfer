@@ -1,0 +1,130 @@
+{
+  "generatedWith": {
+    "statsmodels": "0.15.0"
+  },
+  "cases": [
+    {
+      "name": "one-sample, 58/100 vs p = 0.5, two-sided",
+      "input": {
+        "successes": 58,
+        "trials": 100,
+        "p": 0.5,
+        "alternative": "two-sided"
+      },
+      "expected": {
+        "statistic": 1.5999999999999992,
+        "pValue": 0.10959858339911614,
+        "estimate": 0.58,
+        "confidenceInterval": [
+          0.4832643101683205,
+          0.6767356898316794
+        ]
+      }
+    },
+    {
+      "name": "two-sample, 45/120 vs 30/110, two-sided",
+      "input": {
+        "successes": [
+          45,
+          30
+        ],
+        "trials": [
+          120,
+          110
+        ],
+        "alternative": "two-sided"
+      },
+      "expected": {
+        "statistic": 1.6527769221078203,
+        "pValue": 0.0983762725319519,
+        "estimate": 0.10227272727272729,
+        "confidenceInterval": [
+          -0.01785053002937728,
+          0.22239598457483187
+        ]
+      }
+    },
+    {
+      "name": "one-sample, 58/100 vs p = 0.5, less",
+      "input": {
+        "successes": 58,
+        "trials": 100,
+        "p": 0.5,
+        "alternative": "less"
+      },
+      "expected": {
+        "statistic": 1.5999999999999992,
+        "pValue": 0.9452007083004419,
+        "estimate": 0.58,
+        "confidenceInterval": [
+          0.0,
+          0.6611831500631531
+        ]
+      }
+    },
+    {
+      "name": "two-sample, 45/120 vs 30/110, less",
+      "input": {
+        "successes": [
+          45,
+          30
+        ],
+        "trials": [
+          120,
+          110
+        ],
+        "alternative": "less"
+      },
+      "expected": {
+        "statistic": 1.6527769221078203,
+        "pValue": 0.950811863734024,
+        "estimate": 0.10227272727272729,
+        "confidenceInterval": [
+          -1.0,
+          0.20308334267847877
+        ]
+      }
+    },
+    {
+      "name": "one-sample, 58/100 vs p = 0.5, greater",
+      "input": {
+        "successes": 58,
+        "trials": 100,
+        "p": 0.5,
+        "alternative": "greater"
+      },
+      "expected": {
+        "statistic": 1.5999999999999992,
+        "pValue": 0.05479929169955807,
+        "estimate": 0.58,
+        "confidenceInterval": [
+          0.4988168499368469,
+          1.0
+        ]
+      }
+    },
+    {
+      "name": "two-sample, 45/120 vs 30/110, greater",
+      "input": {
+        "successes": [
+          45,
+          30
+        ],
+        "trials": [
+          120,
+          110
+        ],
+        "alternative": "greater"
+      },
+      "expected": {
+        "statistic": 1.6527769221078203,
+        "pValue": 0.04918813626597595,
+        "estimate": 0.10227272727272729,
+        "confidenceInterval": [
+          0.0014621118669757988,
+          1.0
+        ]
+      }
+    }
+  ]
+}

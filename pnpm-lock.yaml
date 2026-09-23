@@ -166,6 +166,12 @@ importers:
 
   .:
     dependencies:
+      '@stdlib/stats-base-dists-normal-cdf':
+        specifier: ^0.3.1
+        version: 0.3.1
+      '@stdlib/stats-base-dists-normal-quantile':
+        specifier: ^0.3.1
+        version: 0.3.1
       '@stdlib/stats-base-dists-t-cdf':
         specifier: ^0.2.3
         version: 0.2.3
@@ -960,6 +966,11 @@ packages:
     engines: {node: '>=0.10.0', npm: '>2.7.0'}
     os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
 
+  '@stdlib/math-base-napi-ternary@0.3.2':
+    resolution: {integrity: sha512-DUu7zbd692l86VnUaav4dgIVIkYnxklDMMKpmGT+mi30QH959324tjl3dsthYy5iySnKWg/V0z54opu0FC8jXA==}
+    engines: {node: '>=0.10.0', npm: '>2.7.0'}
+    os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
+
   '@stdlib/math-base-napi-unary@0.2.7':
     resolution: {integrity: sha512-eEu0nAq8WzCGe15ppGJWtLGhKOoG4OcMJQpsfbjwaa3sZ9h1sREmV1iiAFWyi/mHy8C0y6PiG2szx4D/F0ywmg==}
     engines: {node: '>=0.10.0', npm: '>2.7.0'}
@@ -1022,6 +1033,11 @@ packages:
 
   '@stdlib/math-base-special-erfcinv@0.2.4':
     resolution: {integrity: sha512-oF/3UXs2zZFAOKe19rRcWg2SFZFHQbnFJ4ucbSzYykM79pDnvVtSP/dRPtDy3uevUix6BzeloFyK0dLbQsYt+w==}
+    engines: {node: '>=0.10.0', npm: '>2.7.0'}
+    os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
+
+  '@stdlib/math-base-special-erfinv@0.3.1':
+    resolution: {integrity: sha512-BJxcF6nicIU6ZTybfJMQaWC2VeeyQJ8PgR9AxcY0eaK4gsr04dvfCA7Rs/MDGhRozZGA6y8HcmmQk6XbF78Jag==}
     engines: {node: '>=0.10.0', npm: '>2.7.0'}
     os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
 
@@ -1377,6 +1393,26 @@ packages:
 
   '@stdlib/regexp-function-name@0.2.3':
     resolution: {integrity: sha512-ER1C2rUW5Kzu5w4W0gbrJdIj5STNO5RfNy4GeiqycezeiXT99G393QeN4irqcOItYkeZhwbpY2ZzwlLxQvod1A==}
+    engines: {node: '>=0.10.0', npm: '>2.7.0'}
+    os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
+
+  '@stdlib/stats-base-dists-degenerate-cdf@0.3.1':
+    resolution: {integrity: sha512-i6qu8JegKFJ/xJcnJH4x+wMTxKbHtMG2bOVjdFswxt5MHGEob0bmpZMCPaUQ99KDXx1ntntbAzqURt8Bwhi12g==}
+    engines: {node: '>=0.10.0', npm: '>2.7.0'}
+    os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
+
+  '@stdlib/stats-base-dists-degenerate-quantile@0.3.1':
+    resolution: {integrity: sha512-1KvjtzZIZ5zJVNFfjhFGagrwZA5YlYOT5+zfphdZUz0VXl0lHzLKnNToktwk8Frx/YdNGIdusTSAnmcr9yFOug==}
+    engines: {node: '>=0.10.0', npm: '>2.7.0'}
+    os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
+
+  '@stdlib/stats-base-dists-normal-cdf@0.3.1':
+    resolution: {integrity: sha512-a4xGRE5ZKaB1J9wGEXu7gforIA9mGkR3BqlHPaaUuasDBdYxsI6NH7mZr/zeWaT4c176iiZzJjYMPWUAdV4aFQ==}
+    engines: {node: '>=0.10.0', npm: '>2.7.0'}
+    os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
+
+  '@stdlib/stats-base-dists-normal-quantile@0.3.1':
+    resolution: {integrity: sha512-c5CgbvkdG84yUmnAJp467Lc8g0DFxdghZ3JqzwfD2+iuqQwG6zjzmI0uV7LeNUavCr/DN/sCbGQ8Ar29WQnwlw==}
     engines: {node: '>=0.10.0', npm: '>2.7.0'}
     os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
 
@@ -2734,6 +2770,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@stdlib/math-base-napi-ternary@0.3.2':
+    dependencies:
+      '@stdlib/complex-float32-ctor': 0.1.1
+      '@stdlib/complex-float32-reim': 0.1.4
+      '@stdlib/complex-float64-ctor': 0.1.2
+      '@stdlib/complex-float64-reim': 0.1.4
+      '@stdlib/utils-library-manifest': 0.2.4
+    transitivePeerDependencies:
+      - supports-color
+
   '@stdlib/math-base-napi-unary@0.2.7':
     dependencies:
       '@stdlib/complex-float32-ctor': 0.1.1
@@ -2866,6 +2912,18 @@ snapshots:
       - supports-color
 
   '@stdlib/math-base-special-erfcinv@0.2.4':
+    dependencies:
+      '@stdlib/constants-float64-ninf': 0.2.3
+      '@stdlib/constants-float64-pinf': 0.2.3
+      '@stdlib/math-base-assert-is-nan': 0.2.3
+      '@stdlib/math-base-napi-unary': 0.2.7
+      '@stdlib/math-base-special-ln': 0.2.5
+      '@stdlib/math-base-special-sqrt': 0.2.3
+      '@stdlib/utils-library-manifest': 0.2.4
+    transitivePeerDependencies:
+      - supports-color
+
+  '@stdlib/math-base-special-erfinv@0.3.1':
     dependencies:
       '@stdlib/constants-float64-ninf': 0.2.3
       '@stdlib/constants-float64-pinf': 0.2.3
@@ -3703,6 +3761,53 @@ snapshots:
   '@stdlib/regexp-function-name@0.2.3':
     dependencies:
       '@stdlib/utils-define-nonenumerable-read-only-property': 0.2.3
+
+  '@stdlib/stats-base-dists-degenerate-cdf@0.3.1':
+    dependencies:
+      '@stdlib/math-base-assert-is-nan': 0.2.3
+      '@stdlib/math-base-napi-binary': 0.3.3
+      '@stdlib/utils-constant-function': 0.2.3
+      '@stdlib/utils-define-nonenumerable-read-only-property': 0.2.3
+      '@stdlib/utils-library-manifest': 0.2.4
+    transitivePeerDependencies:
+      - supports-color
+
+  '@stdlib/stats-base-dists-degenerate-quantile@0.3.1':
+    dependencies:
+      '@stdlib/math-base-assert-is-nan': 0.2.3
+      '@stdlib/math-base-napi-binary': 0.3.3
+      '@stdlib/utils-constant-function': 0.2.3
+      '@stdlib/utils-define-nonenumerable-read-only-property': 0.2.3
+      '@stdlib/utils-library-manifest': 0.2.4
+    transitivePeerDependencies:
+      - supports-color
+
+  '@stdlib/stats-base-dists-normal-cdf@0.3.1':
+    dependencies:
+      '@stdlib/math-base-assert-is-nan': 0.2.3
+      '@stdlib/math-base-napi-ternary': 0.3.2
+      '@stdlib/math-base-special-erfc': 0.2.5
+      '@stdlib/math-base-special-sqrt': 0.2.3
+      '@stdlib/stats-base-dists-degenerate-cdf': 0.3.1
+      '@stdlib/utils-constant-function': 0.2.3
+      '@stdlib/utils-define-nonenumerable-read-only-property': 0.2.3
+      '@stdlib/utils-library-manifest': 0.2.4
+    transitivePeerDependencies:
+      - supports-color
+
+  '@stdlib/stats-base-dists-normal-quantile@0.3.1':
+    dependencies:
+      '@stdlib/constants-float64-sqrt-two': 0.2.3
+      '@stdlib/math-base-assert-is-nan': 0.2.3
+      '@stdlib/math-base-napi-ternary': 0.3.2
+      '@stdlib/math-base-special-erfinv': 0.3.1
+      '@stdlib/math-base-special-sqrt': 0.2.3
+      '@stdlib/stats-base-dists-degenerate-quantile': 0.3.1
+      '@stdlib/utils-constant-function': 0.2.3
+      '@stdlib/utils-define-nonenumerable-read-only-property': 0.2.3
+      '@stdlib/utils-library-manifest': 0.2.4
+    transitivePeerDependencies:
+      - supports-color
 
   '@stdlib/stats-base-dists-t-cdf@0.2.3':
     dependencies:
