@@ -1,22 +1,43 @@
 {
   "name": "statinfer",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Statistical inference for modern JavaScript and TypeScript",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "start": "node index.js",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leehart3000/statinfer.git"
   },
-  "keywords": ["statistics", "inference"],
+  "keywords": [
+    "statistics",
+    "inference"
+  ],
   "author": "Lee Hart",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/leehart3000/statinfer/issues"
   },
-  "homepage": "https://github.com/leehart3000/statinfer#readme"
+  "homepage": "https://github.com/leehart3000/statinfer#readme",
+  "packageManager": "pnpm@12.5.1+sha512.e3f305bc784a2bc89f5ad3b6138889470fae8d2af5f36b61216ec91c2c3d64089775f9de38aac331044ea40f245cb0d5666392dfdf65824e1907ef6a2c62de5f",
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "typescript": "^6.0.3"
+  }
 }
