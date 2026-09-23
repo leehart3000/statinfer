@@ -20,7 +20,8 @@
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "fixtures": "uv run --project scripts scripts/generate_fixtures.py"
   },
   "repository": {
     "type": "git",

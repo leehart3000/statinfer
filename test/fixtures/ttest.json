@@ -1,0 +1,431 @@
+{
+  "generatedWith": {
+    "scipy": "1.18.1",
+    "numpy": "2.5.3"
+  },
+  "cases": [
+    {
+      "name": "one-sample, mu = 5, two-sided",
+      "input": {
+        "kind": "one-sample",
+        "x": [
+          5.1,
+          4.9,
+          5.6,
+          5.8,
+          6.0,
+          5.5,
+          5.3,
+          6.2
+        ],
+        "mu": 5,
+        "alternative": "two-sided"
+      },
+      "expected": {
+        "statistic": 3.5036213149883326,
+        "pValue": 0.009944414335751597,
+        "df": 7.0,
+        "estimate": 5.55,
+        "confidenceInterval": [
+          5.178800255092534,
+          5.921199744907466
+        ]
+      }
+    },
+    {
+      "name": "paired, two-sided",
+      "input": {
+        "kind": "paired",
+        "x": [
+          70,
+          74,
+          68,
+          75,
+          73,
+          68,
+          74,
+          72
+        ],
+        "y": [
+          72,
+          75,
+          71,
+          78,
+          74,
+          69,
+          77,
+          73
+        ],
+        "alternative": "two-sided"
+      },
+      "expected": {
+        "statistic": -5.351295510095069,
+        "pValue": 0.0010627147543785522,
+        "df": 7.0,
+        "estimate": -1.875,
+        "confidenceInterval": [
+          -2.703522824682822,
+          -1.0464771753171778
+        ]
+      }
+    },
+    {
+      "name": "Welch two-sample, two-sided",
+      "input": {
+        "kind": "welch",
+        "x": [
+          5.1,
+          4.9,
+          5.6,
+          5.8,
+          6.0,
+          5.5,
+          5.3,
+          6.2
+        ],
+        "y": [
+          4.8,
+          5.0,
+          5.2,
+          4.7,
+          5.1,
+          5.4,
+          4.9,
+          5.0,
+          4.6
+        ],
+        "alternative": "two-sided"
+      },
+      "expected": {
+        "statistic": 3.2821659106947383,
+        "pValue": 0.007518893284397018,
+        "df": 10.753891116328738,
+        "estimate": 0.583333333333333,
+        "confidenceInterval": [
+          0.19106125877987007,
+          0.975605407886796
+        ]
+      }
+    },
+    {
+      "name": "pooled two-sample, two-sided",
+      "input": {
+        "kind": "pooled",
+        "x": [
+          5.1,
+          4.9,
+          5.6,
+          5.8,
+          6.0,
+          5.5,
+          5.3,
+          6.2
+        ],
+        "y": [
+          4.8,
+          5.0,
+          5.2,
+          4.7,
+          5.1,
+          5.4,
+          4.9,
+          5.0,
+          4.6
+        ],
+        "alternative": "two-sided"
+      },
+      "expected": {
+        "statistic": 3.390980453430013,
+        "pValue": 0.004031712070398939,
+        "df": 15.0,
+        "estimate": 0.583333333333333,
+        "confidenceInterval": [
+          0.21667077502057586,
+          0.9499958916460902
+        ]
+      }
+    },
+    {
+      "name": "one-sample, mu = 5, less",
+      "input": {
+        "kind": "one-sample",
+        "x": [
+          5.1,
+          4.9,
+          5.6,
+          5.8,
+          6.0,
+          5.5,
+          5.3,
+          6.2
+        ],
+        "mu": 5,
+        "alternative": "less"
+      },
+      "expected": {
+        "statistic": 3.5036213149883326,
+        "pValue": 0.9950277928321242,
+        "df": 7.0,
+        "estimate": 5.55,
+        "confidenceInterval": [
+          null,
+          5.847411774594987
+        ]
+      }
+    },
+    {
+      "name": "paired, less",
+      "input": {
+        "kind": "paired",
+        "x": [
+          70,
+          74,
+          68,
+          75,
+          73,
+          68,
+          74,
+          72
+        ],
+        "y": [
+          72,
+          75,
+          71,
+          78,
+          74,
+          69,
+          77,
+          73
+        ],
+        "alternative": "less"
+      },
+      "expected": {
+        "statistic": -5.351295510095069,
+        "pValue": 0.0005313573771892761,
+        "df": 7.0,
+        "estimate": -1.875,
+        "confidenceInterval": [
+          null,
+          -1.211172917783669
+        ]
+      }
+    },
+    {
+      "name": "Welch two-sample, less",
+      "input": {
+        "kind": "welch",
+        "x": [
+          5.1,
+          4.9,
+          5.6,
+          5.8,
+          6.0,
+          5.5,
+          5.3,
+          6.2
+        ],
+        "y": [
+          4.8,
+          5.0,
+          5.2,
+          4.7,
+          5.1,
+          5.4,
+          4.9,
+          5.0,
+          4.6
+        ],
+        "alternative": "less"
+      },
+      "expected": {
+        "statistic": 3.2821659106947383,
+        "pValue": 0.9962405533578015,
+        "df": 10.753891116328738,
+        "estimate": 0.583333333333333,
+        "confidenceInterval": [
+          null,
+          0.9031824074729862
+        ]
+      }
+    },
+    {
+      "name": "pooled two-sample, less",
+      "input": {
+        "kind": "pooled",
+        "x": [
+          5.1,
+          4.9,
+          5.6,
+          5.8,
+          6.0,
+          5.5,
+          5.3,
+          6.2
+        ],
+        "y": [
+          4.8,
+          5.0,
+          5.2,
+          4.7,
+          5.1,
+          5.4,
+          4.9,
+          5.0,
+          4.6
+        ],
+        "alternative": "less"
+      },
+      "expected": {
+        "statistic": 3.390980453430013,
+        "pValue": 0.9979841439648005,
+        "df": 15.0,
+        "estimate": 0.583333333333333,
+        "confidenceInterval": [
+          null,
+          0.8849017798435302
+        ]
+      }
+    },
+    {
+      "name": "one-sample, mu = 5, greater",
+      "input": {
+        "kind": "one-sample",
+        "x": [
+          5.1,
+          4.9,
+          5.6,
+          5.8,
+          6.0,
+          5.5,
+          5.3,
+          6.2
+        ],
+        "mu": 5,
+        "alternative": "greater"
+      },
+      "expected": {
+        "statistic": 3.5036213149883326,
+        "pValue": 0.0049722071678757985,
+        "df": 7.0,
+        "estimate": 5.55,
+        "confidenceInterval": [
+          5.252588225405012,
+          null
+        ]
+      }
+    },
+    {
+      "name": "paired, greater",
+      "input": {
+        "kind": "paired",
+        "x": [
+          70,
+          74,
+          68,
+          75,
+          73,
+          68,
+          74,
+          72
+        ],
+        "y": [
+          72,
+          75,
+          71,
+          78,
+          74,
+          69,
+          77,
+          73
+        ],
+        "alternative": "greater"
+      },
+      "expected": {
+        "statistic": -5.351295510095069,
+        "pValue": 0.9994686426228108,
+        "df": 7.0,
+        "estimate": -1.875,
+        "confidenceInterval": [
+          -2.538827082216331,
+          null
+        ]
+      }
+    },
+    {
+      "name": "Welch two-sample, greater",
+      "input": {
+        "kind": "welch",
+        "x": [
+          5.1,
+          4.9,
+          5.6,
+          5.8,
+          6.0,
+          5.5,
+          5.3,
+          6.2
+        ],
+        "y": [
+          4.8,
+          5.0,
+          5.2,
+          4.7,
+          5.1,
+          5.4,
+          4.9,
+          5.0,
+          4.6
+        ],
+        "alternative": "greater"
+      },
+      "expected": {
+        "statistic": 3.2821659106947383,
+        "pValue": 0.003759446642198509,
+        "df": 10.753891116328738,
+        "estimate": 0.583333333333333,
+        "confidenceInterval": [
+          0.26348425919367985,
+          null
+        ]
+      }
+    },
+    {
+      "name": "pooled two-sample, greater",
+      "input": {
+        "kind": "pooled",
+        "x": [
+          5.1,
+          4.9,
+          5.6,
+          5.8,
+          6.0,
+          5.5,
+          5.3,
+          6.2
+        ],
+        "y": [
+          4.8,
+          5.0,
+          5.2,
+          4.7,
+          5.1,
+          5.4,
+          4.9,
+          5.0,
+          4.6
+        ],
+        "alternative": "greater"
+      },
+      "expected": {
+        "statistic": 3.390980453430013,
+        "pValue": 0.0020158560351994695,
+        "df": 15.0,
+        "estimate": 0.583333333333333,
+        "confidenceInterval": [
+          0.28176488682313583,
+          null
+        ]
+      }
+    }
+  ]
+}

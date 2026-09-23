@@ -1,0 +1,13 @@
+[project]
+name = "statinfer-fixtures"
+version = "0.0.0"
+description = "Generates expected results from SciPy for statinfer's tests"
+requires-python = ">=3.14"
+dependencies = [
+    "numpy>=2.5.3",
+    "scipy>=1.18.1",
+]
+
+[tool.uv]
+package = false
+python-preference = "only-managed"
