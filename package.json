@@ -22,7 +22,8 @@
     "test": "vitest run",
     "lint": "eslint .",
     "fixtures": "uv run --project scripts scripts/generate_fixtures.py",
-    "docs:api": "typedoc"
+    "docs:api": "typedoc",
+    "typecheck": "tsc -p test"
   },
   "repository": {
     "type": "git",

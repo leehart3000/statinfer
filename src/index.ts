@@ -15,4 +15,6 @@ export { anova } from "./anova.js";
 export type { AnovaOptions } from "./anova.js";
 export { fishersExactTest } from "./fisher.js";
 export type { FishersExactTestOptions } from "./fisher.js";
+export { summarize } from "./summarize.js";
+export type { SummarizeOptions } from "./summarize.js";
 export type { Alternative, TestResult } from "./types.js";
