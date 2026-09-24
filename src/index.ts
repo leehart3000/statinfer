@@ -9,4 +9,6 @@ export type {
   ChiSquareIndependenceOptions,
   ChiSquareGoodnessOfFitOptions,
 } from "./chisquare.js";
+export { correlationTest } from "./correlation.js";
+export type { CorrelationTestOptions } from "./correlation.js";
 export type { Alternative, TestResult } from "./types.js";

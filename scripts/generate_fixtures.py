@@ -176,3 +176,53 @@ for observed, proportions in [
 chi_output = {"generatedWith": {"scipy": scipy.__version__}, "cases": chi_cases}
 (OUT_DIR / "chisquare.json").write_text(json.dumps(chi_output, indent=2, allow_nan=False) + "\n")
 print(f"Wrote {len(chi_cases)} cases to {OUT_DIR / 'chisquare.json'}")
+
+
+# --- Correlation tests -----------------------------------------------------
+
+cx = [2.1, 3.4, 1.9, 5.6, 4.2, 3.3, 6.1, 2.8, 4.9, 3.7]
+cy = [1.8, 3.9, 2.2, 5.1, 3.6, 3.5, 6.4, 2.5, 4.1, 4.4]
+# Data with ties, to check the ranking helper.
+tx = [1, 2, 2, 3, 4, 4, 4, 5, 6, 7]
+ty = [2, 1, 3, 3, 5, 4, 6, 6, 8, 7]
+
+
+def t_from_r(r, df):
+    """The t-statistic for a correlation (SciPy reports r itself, not t)."""
+    return r * math.sqrt(df / (1 - r * r))
+
+
+corr_cases = []
+for alt in ["two-sided", "less", "greater"]:
+    res = stats.pearsonr(cx, cy, alternative=alt)
+    ci = res.confidence_interval(confidence_level=0.95)
+    r, df = float(res.statistic), len(cx) - 2
+    corr_cases.append({
+        "name": f"pearson, {alt}",
+        "input": {"x": cx, "y": cy, "method": "pearson", "alternative": alt},
+        "expected": {
+            "estimate": r,
+            "statistic": t_from_r(r, df),
+            "pValue": float(res.pvalue),
+            "df": df,
+            "confidenceInterval": [float(ci.low), float(ci.high)],
+        },
+    })
+
+    res = stats.spearmanr(tx, ty, alternative=alt)
+    rho, df = float(res.statistic), len(tx) - 2
+    corr_cases.append({
+        "name": f"spearman with ties, {alt}",
+        "input": {"x": tx, "y": ty, "method": "spearman", "alternative": alt},
+        "expected": {
+            "estimate": rho,
+            "statistic": t_from_r(rho, df),
+            "pValue": float(res.pvalue),
+            "df": df,
+            "confidenceInterval": None,
+        },
+    })
+
+corr_output = {"generatedWith": {"scipy": scipy.__version__}, "cases": corr_cases}
+(OUT_DIR / "correlation.json").write_text(json.dumps(corr_output, indent=2, allow_nan=False) + "\n")
+print(f"Wrote {len(corr_cases)} cases to {OUT_DIR / 'correlation.json'}")
