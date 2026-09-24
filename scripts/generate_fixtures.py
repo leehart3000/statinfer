@@ -226,3 +226,28 @@ for alt in ["two-sided", "less", "greater"]:
 corr_output = {"generatedWith": {"scipy": scipy.__version__}, "cases": corr_cases}
 (OUT_DIR / "correlation.json").write_text(json.dumps(corr_output, indent=2, allow_nan=False) + "\n")
 print(f"Wrote {len(corr_cases)} cases to {OUT_DIR / 'correlation.json'}")
+
+
+# --- One-way ANOVA ---------------------------------------------------------
+
+anova_cases = []
+for groups in [
+    [[23, 25, 21, 27, 24], [30, 28, 33, 29], [22, 20, 24, 23, 21, 25]],
+    [[5.1, 4.8, 5.5, 5.0], [5.3, 5.6, 5.2, 5.9, 5.4], [4.9, 5.0, 4.7, 5.2], [5.8, 6.1, 5.7, 6.0, 5.9]],
+]:
+    res = stats.f_oneway(*groups)
+    k = len(groups)
+    n = sum(len(g) for g in groups)
+    anova_cases.append({
+        "name": f"{k} groups, sizes {[len(g) for g in groups]}",
+        "input": {"groups": groups},
+        "expected": {
+            "statistic": float(res.statistic),
+            "pValue": float(res.pvalue),
+            "df": [k - 1, n - k],
+        },
+    })
+
+anova_output = {"generatedWith": {"scipy": scipy.__version__}, "cases": anova_cases}
+(OUT_DIR / "anova.json").write_text(json.dumps(anova_output, indent=2, allow_nan=False) + "\n")
+print(f"Wrote {len(anova_cases)} cases to {OUT_DIR / 'anova.json'}")

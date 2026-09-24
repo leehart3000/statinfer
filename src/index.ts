@@ -11,4 +11,6 @@ export type {
 } from "./chisquare.js";
 export { correlationTest } from "./correlation.js";
 export type { CorrelationTestOptions } from "./correlation.js";
+export { anova } from "./anova.js";
+export type { AnovaOptions } from "./anova.js";
 export type { Alternative, TestResult } from "./types.js";
