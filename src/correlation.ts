@@ -4,7 +4,9 @@ import { mean } from "./descriptive.js";
 import { rank } from "./rank.js";
 import type { Alternative, TestResult } from "./types.js";
 
+/** Options for {@link correlationTest}. */
 export interface CorrelationTestOptions {
+  /** The first variable. */
   x: readonly number[];
   /** Must be the same length as x. */
   y: readonly number[];

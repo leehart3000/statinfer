@@ -2,6 +2,7 @@ import betainc from "@stdlib/math-base-special-betainc";
 import { mean } from "./descriptive.js";
 import type { TestResult } from "./types.js";
 
+/** Options for {@link anova}. */
 export interface AnovaOptions {
   /** Two or more groups of values. Groups can be different sizes. */
   groups: readonly (readonly number[])[];

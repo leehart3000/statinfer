@@ -1,6 +1,7 @@
 import hypergeometricPmf from "@stdlib/stats-base-dists-hypergeometric-pmf";
 import type { Alternative, TestResult } from "./types.js";
 
+/** Options for {@link fishersExactTest}. */
 export interface FishersExactTestOptions {
   /** A 2×2 table of counts: [[a, b], [c, d]]. */
   table: readonly [readonly [number, number], readonly [number, number]];

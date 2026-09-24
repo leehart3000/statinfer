@@ -3,6 +3,7 @@ import tQuantile from "@stdlib/stats-base-dists-t-quantile";
 import { mean, variance } from "./descriptive.js";
 import type { Alternative, TestResult } from "./types.js";
 
+/** Options for {@link tTest}. Pass `x` alone for a one-sample test, or `x` and `y` for a paired or two-sample test. */
 export interface TTestOptions {
   /** The first (or only) sample. */
   x: readonly number[];
@@ -14,6 +15,7 @@ export interface TTestOptions {
   equalVariance?: boolean;
   /** The hypothesised mean (or mean difference). Default: 0. */
   mu?: number;
+  /** "greater" means the mean (or mean difference) is above `mu`. Default: "two-sided". */
   alternative?: Alternative;
   /** Default: 0.95. */
   confidenceLevel?: number;

@@ -1,6 +1,7 @@
 import gammainc from "@stdlib/math-base-special-gammainc";
 import type { TestResult } from "./types.js";
 
+/** Options for a chi-square test of independence. */
 export interface ChiSquareIndependenceOptions {
   /** A table of counts, as rows. Needs at least 2 rows and 2 columns. */
   table: readonly (readonly number[])[];
@@ -8,6 +9,7 @@ export interface ChiSquareIndependenceOptions {
   correction?: boolean;
 }
 
+/** Options for a chi-square goodness-of-fit test. */
 export interface ChiSquareGoodnessOfFitOptions {
   /** Observed counts in each category. */
   observed: readonly number[];
@@ -15,6 +17,7 @@ export interface ChiSquareGoodnessOfFitOptions {
   expectedProportions?: readonly number[];
 }
 
+/** Options for {@link chiSquareTest}: pass `table` for independence, or `observed` for goodness-of-fit. */
 export type ChiSquareTestOptions = ChiSquareIndependenceOptions | ChiSquareGoodnessOfFitOptions;
 
 /**
