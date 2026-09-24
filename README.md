@@ -84,6 +84,7 @@ Every test is checked against SciPy or statsmodels to about 10 decimal places. T
 
 ```sh
 pnpm install
+pnpm check       # run all checks (lint, build, typecheck, test, docs)
 pnpm test        # run tests
 pnpm lint        # check code style
 pnpm typecheck   # type-check the tests

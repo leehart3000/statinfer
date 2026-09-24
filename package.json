@@ -25,7 +25,8 @@
     "lint": "eslint .",
     "fixtures": "uv run --project scripts scripts/generate_fixtures.py",
     "docs:api": "typedoc",
-    "typecheck": "tsc -p test"
+    "typecheck": "tsc -p test",
+    "check": "pnpm lint && pnpm build && pnpm typecheck && pnpm test && pnpm docs:api"
   },
   "repository": {
     "type": "git",
