@@ -172,6 +172,9 @@ importers:
       '@stdlib/math-base-special-gammainc':
         specifier: ^0.3.1
         version: 0.3.1
+      '@stdlib/stats-base-dists-hypergeometric-pmf':
+        specifier: ^0.3.1
+        version: 0.3.1
       '@stdlib/stats-base-dists-normal-cdf':
         specifier: ^0.3.1
         version: 0.3.1
@@ -952,8 +955,18 @@ packages:
     engines: {node: '>=0.10.0', npm: '>2.7.0'}
     os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
 
+  '@stdlib/math-base-assert-is-negative-integer@0.3.2':
+    resolution: {integrity: sha512-Qpot7W5jR7PfRGvdE8b7K+6Ii4LaYezjdfVN1Fr1OllX3xSAfH9+Gfp2gZdJhp+5YZqh5Mltjo5M0A3U4sIVeg==}
+    engines: {node: '>=0.10.0', npm: '>2.7.0'}
+    os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
+
   '@stdlib/math-base-assert-is-negative-zero@0.2.3':
     resolution: {integrity: sha512-5XzTwloDrG60ZRd5vgbw/lXKn794s2q8Hb0pT2LUy0WG2j98LhAQNEv0f0a7brhHlGOMTX5Hmg1DZXw+ve2u5Q==}
+    engines: {node: '>=0.10.0', npm: '>2.7.0'}
+    os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
+
+  '@stdlib/math-base-assert-is-nonnegative-integer@0.2.2':
+    resolution: {integrity: sha512-wBUFjhXVNxpIJ4Ldul8AuDZNJJ7vd8Rqa9m78MR44br114KXfZyiGXCsRm9pphJAbtve3xNjNnpe96fd5bqfpA==}
     engines: {node: '>=0.10.0', npm: '>2.7.0'}
     os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
 
@@ -969,6 +982,11 @@ packages:
 
   '@stdlib/math-base-napi-binary@0.3.3':
     resolution: {integrity: sha512-rLBojVTK0GRhy5v0MEKLmamggOrosEMaDcMS5ITuUe6Jgz4DM3lsiB/EHhd0TamPdqo+5HPjqSo10zpFVbLZbA==}
+    engines: {node: '>=0.10.0', npm: '>2.7.0'}
+    os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
+
+  '@stdlib/math-base-napi-quaternary@0.2.4':
+    resolution: {integrity: sha512-yNUceTXSWluXXi4U3SuTi43PXLveBAK+4DL+XBhluzU4lhtxnitf5FoBmRgy7i9LNAlXJjSKBYmBE/g/j0juvQ==}
     engines: {node: '>=0.10.0', npm: '>2.7.0'}
     os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
 
@@ -1059,6 +1077,11 @@ packages:
 
   '@stdlib/math-base-special-factorial@0.3.2':
     resolution: {integrity: sha512-YOqPZBtZPP+Pa6jQn/IY0JjGx1sShxQ27XYbpgupg9yZCvabLzhHg+J6/mnjqf4eti6UcVtCITFUZOZ671GyOQ==}
+    engines: {node: '>=0.10.0', npm: '>2.7.0'}
+    os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
+
+  '@stdlib/math-base-special-factorialln@0.3.1':
+    resolution: {integrity: sha512-7zJCZWBjRZ4YVDuP426YrAc1XLujZ/PgRv0esIr0JRzsFzJqrLZU87Nip798oxNivY6grdiDiWfmxUnPgETI3A==}
     engines: {node: '>=0.10.0', npm: '>2.7.0'}
     os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
 
@@ -1409,6 +1432,11 @@ packages:
 
   '@stdlib/stats-base-dists-degenerate-quantile@0.3.1':
     resolution: {integrity: sha512-1KvjtzZIZ5zJVNFfjhFGagrwZA5YlYOT5+zfphdZUz0VXl0lHzLKnNToktwk8Frx/YdNGIdusTSAnmcr9yFOug==}
+    engines: {node: '>=0.10.0', npm: '>2.7.0'}
+    os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
+
+  '@stdlib/stats-base-dists-hypergeometric-pmf@0.3.1':
+    resolution: {integrity: sha512-yBsYDKlgr2Wya+oEPFh5Q3NZGECXV4TNah/L/sIYNBvAAfyNlu01M6Fn7v9gvOxONznz369y2lY3J0SG60QoUw==}
     engines: {node: '>=0.10.0', npm: '>2.7.0'}
     os: [aix, darwin, freebsd, linux, macos, openbsd, sunos, win32, windows]
 
@@ -2741,9 +2769,23 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@stdlib/math-base-assert-is-negative-integer@0.3.2':
+    dependencies:
+      '@stdlib/math-base-special-floor': 0.2.4
+      '@stdlib/utils-library-manifest': 0.2.4
+    transitivePeerDependencies:
+      - supports-color
+
   '@stdlib/math-base-assert-is-negative-zero@0.2.3':
     dependencies:
       '@stdlib/constants-float64-ninf': 0.2.3
+      '@stdlib/utils-library-manifest': 0.2.4
+    transitivePeerDependencies:
+      - supports-color
+
+  '@stdlib/math-base-assert-is-nonnegative-integer@0.2.2':
+    dependencies:
+      '@stdlib/math-base-special-floor': 0.2.4
       '@stdlib/utils-library-manifest': 0.2.4
     transitivePeerDependencies:
       - supports-color
@@ -2772,6 +2814,12 @@ snapshots:
       '@stdlib/complex-float32-reim': 0.1.4
       '@stdlib/complex-float64-ctor': 0.1.2
       '@stdlib/complex-float64-reim': 0.1.4
+      '@stdlib/utils-library-manifest': 0.2.4
+    transitivePeerDependencies:
+      - supports-color
+
+  '@stdlib/math-base-napi-quaternary@0.2.4':
+    dependencies:
       '@stdlib/utils-library-manifest': 0.2.4
     transitivePeerDependencies:
       - supports-color
@@ -2976,6 +3024,15 @@ snapshots:
       '@stdlib/math-base-assert-is-nan': 0.2.3
       '@stdlib/math-base-napi-unary': 0.2.7
       '@stdlib/math-base-special-gamma': 0.3.1
+      '@stdlib/utils-library-manifest': 0.2.4
+    transitivePeerDependencies:
+      - supports-color
+
+  '@stdlib/math-base-special-factorialln@0.3.1':
+    dependencies:
+      '@stdlib/math-base-assert-is-negative-integer': 0.3.2
+      '@stdlib/math-base-napi-unary': 0.2.7
+      '@stdlib/math-base-special-gammaln': 0.3.1
       '@stdlib/utils-library-manifest': 0.2.4
     transitivePeerDependencies:
       - supports-color
@@ -3782,6 +3839,22 @@ snapshots:
     dependencies:
       '@stdlib/math-base-assert-is-nan': 0.2.3
       '@stdlib/math-base-napi-binary': 0.3.3
+      '@stdlib/utils-constant-function': 0.2.3
+      '@stdlib/utils-define-nonenumerable-read-only-property': 0.2.3
+      '@stdlib/utils-library-manifest': 0.2.4
+    transitivePeerDependencies:
+      - supports-color
+
+  '@stdlib/stats-base-dists-hypergeometric-pmf@0.3.1':
+    dependencies:
+      '@stdlib/constants-float64-pinf': 0.2.3
+      '@stdlib/math-base-assert-is-nan': 0.2.3
+      '@stdlib/math-base-assert-is-nonnegative-integer': 0.2.2
+      '@stdlib/math-base-napi-quaternary': 0.2.4
+      '@stdlib/math-base-special-exp': 0.2.5
+      '@stdlib/math-base-special-factorialln': 0.3.1
+      '@stdlib/math-base-special-max': 0.3.1
+      '@stdlib/math-base-special-min': 0.2.4
       '@stdlib/utils-constant-function': 0.2.3
       '@stdlib/utils-define-nonenumerable-read-only-property': 0.2.3
       '@stdlib/utils-library-manifest': 0.2.4

@@ -251,3 +251,28 @@ for groups in [
 anova_output = {"generatedWith": {"scipy": scipy.__version__}, "cases": anova_cases}
 (OUT_DIR / "anova.json").write_text(json.dumps(anova_output, indent=2, allow_nan=False) + "\n")
 print(f"Wrote {len(anova_cases)} cases to {OUT_DIR / 'anova.json'}")
+
+
+# --- Fisher's exact test ---------------------------------------------------
+
+fisher_cases = []
+for table, alts in [
+    ([[8, 2], [1, 5]], ["two-sided", "less", "greater"]),
+    ([[3, 1], [1, 3]], ["two-sided", "less", "greater"]),
+    ([[0, 5], [6, 2]], ["two-sided"]),
+]:
+    for alt in alts:
+        res = stats.fisher_exact(table, alternative=alt)
+        fisher_cases.append({
+            "name": f"{table}, {alt}",
+            "input": {"table": table, "alternative": alt},
+            "expected": {
+                "statistic": table[0][0],
+                "pValue": float(res.pvalue),
+                "estimate": float(res.statistic),
+            },
+        })
+
+fisher_output = {"generatedWith": {"scipy": scipy.__version__}, "cases": fisher_cases}
+(OUT_DIR / "fisher.json").write_text(json.dumps(fisher_output, indent=2, allow_nan=False) + "\n")
+print(f"Wrote {len(fisher_cases)} cases to {OUT_DIR / 'fisher.json'}")
