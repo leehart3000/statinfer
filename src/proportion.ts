@@ -2,6 +2,7 @@ import normalCdf from "@stdlib/stats-base-dists-normal-cdf";
 import normalQuantile from "@stdlib/stats-base-dists-normal-quantile";
 import type { Alternative, TestResult } from "./types.js";
 
+/** Options for {@link proportionTest}. Pass single numbers for a one-sample test, or pairs for a two-sample test. */
 export interface ProportionTestOptions {
   /** Number of successes: one number, or a pair for two groups. */
   successes: number | readonly [number, number];
@@ -9,6 +10,7 @@ export interface ProportionTestOptions {
   trials: number | readonly [number, number];
   /** The hypothesised proportion, for one-sample tests only. Default: 0.5. */
   p?: number;
+  /** "greater" means the proportion is above `p` (one sample), or the first group's is higher (two samples). Default: "two-sided". */
   alternative?: Alternative;
   /** Default: 0.95. */
   confidenceLevel?: number;
