@@ -6,13 +6,15 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "default": "./dist/index.js"
     }
   },
+  "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "NOTICE"
   ],
   "engines": {
     "node": ">=22"
@@ -23,7 +25,8 @@
     "lint": "eslint .",
     "fixtures": "uv run --project scripts scripts/generate_fixtures.py",
     "docs:api": "typedoc",
-    "typecheck": "tsc -p test"
+    "typecheck": "tsc -p test",
+    "check": "pnpm lint && pnpm build && pnpm typecheck && pnpm test && pnpm docs:api"
   },
   "repository": {
     "type": "git",
@@ -34,7 +37,7 @@
     "inference"
   ],
   "author": "Lee Hart",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/leehart3000/statinfer/issues"
   },
