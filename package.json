@@ -21,7 +21,7 @@
   },
   "scripts": {
     "build": "tsdown",
-    "test": "vitest run",
+    "test": "vitest run --dir test",
     "lint": "eslint .",
     "fixtures": "uv run --project scripts scripts/generate_fixtures.py",
     "docs:api": "typedoc",
