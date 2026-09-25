@@ -20,13 +20,14 @@
     "node": ">=22"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsdown",
     "test": "vitest run",
     "lint": "eslint .",
     "fixtures": "uv run --project scripts scripts/generate_fixtures.py",
     "docs:api": "typedoc",
-    "typecheck": "tsc -p test",
-    "check": "pnpm lint && pnpm build && pnpm typecheck && pnpm test && pnpm docs:api"
+    "typecheck": "tsc --noEmit && tsc -p test",
+    "test:dist": "node test/smoke.mjs",
+    "check": "pnpm lint && pnpm build && pnpm typecheck && pnpm test && pnpm test:dist && pnpm docs:api"
   },
   "repository": {
     "type": "git",
@@ -45,20 +46,19 @@
   "packageManager": "pnpm@12.5.1+sha512.e3f305bc784a2bc89f5ad3b6138889470fae8d2af5f36b61216ec91c2c3d64089775f9de38aac331044ea40f245cb0d5666392dfdf65824e1907ef6a2c62de5f",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/node": "^22.20.4",
-    "eslint": "^10.11.0",
-    "typedoc": "^0.28.20",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.70.1",
-    "vitest": "^5.0.1"
-  },
-  "dependencies": {
     "@stdlib/math-base-special-betainc": "^0.2.3",
     "@stdlib/math-base-special-gammainc": "^0.3.1",
     "@stdlib/stats-base-dists-hypergeometric-pmf": "^0.3.1",
     "@stdlib/stats-base-dists-normal-cdf": "^0.3.1",
     "@stdlib/stats-base-dists-normal-quantile": "^0.3.1",
     "@stdlib/stats-base-dists-t-cdf": "^0.2.3",
-    "@stdlib/stats-base-dists-t-quantile": "^0.2.3"
+    "@stdlib/stats-base-dists-t-quantile": "^0.2.3",
+    "@types/node": "^22.20.4",
+    "eslint": "^10.11.0",
+    "tsdown": "^0.23.0",
+    "typedoc": "^0.28.20",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.70.1",
+    "vitest": "^5.0.1"
   }
 }
