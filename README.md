@@ -4,7 +4,7 @@
 
 Statistical inference for modern JavaScript and TypeScript.
 
-statinfer provides classic hypothesis tests with one consistent result format, full TypeScript types, and results checked against SciPy and statsmodels.
+statinfer provides classic hypothesis tests with one consistent result format, full TypeScript types, and results checked against SciPy and statsmodels. It has no runtime dependencies, and bundlers only include the tests you import.
 
 ## Install
 
