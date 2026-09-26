@@ -1,27 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { summarize, tTest, type Alternative, type TestResult } from "statinfer";
-
-type Kind = "one-sample" | "paired" | "welch" | "pooled";
-
-const PURPOSE: Record<Kind, string> = {
-  "one-sample":
-    "Is the average of one group different from a target value? For example: does a machine fill bottles with 500 ml on average?",
-  paired:
-    "Did the same subjects change between two measurements? For example: blood pressure before and after a treatment, for the same patients.",
-  welch:
-    "Do two separate groups have different averages? For example: test scores of two classes. This is the usual choice, because it doesn't assume the groups are equally spread out.",
-  pooled:
-    "The same question as Welch's test, but assuming both groups are equally spread out. Only use it when you have a good reason to believe that.",
-};
-
-const QUANTITY: Record<Kind, string> = {
-  "one-sample": "true mean",
-  paired: "true mean difference (x − y)",
-  welch: "true difference in means (x − y)",
-  pooled: "true difference in means (x − y)",
-};
+import { messages, type Kind } from "./messages";
 
 /** Turns "1, 2 3\n4" into [1, 2, 3, 4], or throws a readable error. */
 function parseNumbers(text: string): number[] {
@@ -34,33 +15,23 @@ function parseNumbers(text: string): number[] {
 
 const fmt = (n: number) => String(Number(n.toPrecision(4)));
 
-/** A plain-language reading of the result. */
+/** A plain-language reading of the result, using the wording in messages.ts. */
 function explain(result: TestResult, kind: Kind, mu: number): string[] {
-  const quantity = QUANTITY[kind];
-  const claim =
-    result.alternative === "less"
-      ? `the ${quantity} is less than ${mu}`
-      : result.alternative === "greater"
-        ? `the ${quantity} is greater than ${mu}`
-        : `the ${quantity} differs from ${mu}`;
-  const p = result.pValue < 0.001 ? "less than 0.001" : fmt(result.pValue);
-  const sentences = [
-    `The estimate from your data is ${fmt(result.estimate!)}.`,
-    `If the ${quantity} really were ${mu}, the chance of getting a result at least this extreme is ${p}. That's the p-value.`,
-    result.pValue < 0.05
-      ? `That's below 0.05, so at the common 5% level this counts as evidence that ${claim}.`
-      : `That's not below 0.05, so at the common 5% level there isn't enough evidence that ${claim}. That doesn't prove it equals ${mu}; the data just can't tell.`,
-  ];
+  const quantity = messages.quantity[kind];
+  const claim = messages.claim[result.alternative ?? "two-sided"](quantity, mu);
+  const p = result.pValue < 0.001 ? messages.pVerySmall : fmt(result.pValue);
   const [low, high] = result.confidenceInterval!;
   const level = `${fmt(result.confidenceLevel! * 100)}%`;
-  sentences.push(
+  return [
+    messages.estimate(fmt(result.estimate!)),
+    messages.pValue(quantity, mu, p),
+    result.pValue < 0.05 ? messages.significant(claim) : messages.notSignificant(claim, mu),
     low === -Infinity
-      ? `The ${level} confidence interval says the ${quantity} is at most ${fmt(high)}.`
+      ? messages.intervalAtMost(level, quantity, fmt(high))
       : high === Infinity
-        ? `The ${level} confidence interval says the ${quantity} is at least ${fmt(low)}.`
-        : `The ${level} confidence interval, ${fmt(low)} to ${fmt(high)}, is the range of values for the ${quantity} that are consistent with your data.`,
-  );
-  return sentences;
+        ? messages.intervalAtLeast(level, quantity, fmt(low))
+        : messages.intervalBetween(level, quantity, fmt(low), fmt(high)),
+  ];
 }
 
 /** The statinfer code that reproduces the result, showing only non-default options. */
@@ -83,9 +54,34 @@ function codeFor(kind: Kind, x: number[], y: number[], mu: number, alternative: 
   ].join("\n");
 }
 
-const field = { display: "grid", gap: "0.25rem" } as const;
+type Outcome = { result: TestResult; explanation: string[]; code: string } | { error: string };
 
-export default function TTestDemo() {
+interface TTestState {
+  kind: Kind;
+  changeKind: (next: Kind) => void;
+  xText: string;
+  setXText: (text: string) => void;
+  yText: string;
+  setYText: (text: string) => void;
+  mu: string;
+  setMu: (text: string) => void;
+  alternative: Alternative;
+  setAlternative: (alternative: Alternative) => void;
+  confidence: string;
+  setConfidence: (text: string) => void;
+  outcome: Outcome;
+}
+
+const TTestContext = createContext<TTestState | null>(null);
+
+function useTTest(): TTestState {
+  const state = useContext(TTestContext);
+  if (!state) throw new Error("t-test components must be placed inside <TTestDemo>");
+  return state;
+}
+
+/** Holds the t-test's inputs and result, and shares them with the components inside it. */
+export function TTestDemo({ children }: { children: React.ReactNode }) {
   const [kind, setKind] = useState<Kind>("one-sample");
   const [xText, setXText] = useState("5.1, 4.9, 5.6, 5.8, 6.0, 5.5, 5.3, 6.2");
   const [yText, setYText] = useState("4.8, 5.0, 5.2, 4.7, 5.1, 5.4, 4.9, 5.0");
@@ -93,9 +89,7 @@ export default function TTestDemo() {
   const [alternative, setAlternative] = useState<Alternative>("two-sided");
   const [confidence, setConfidence] = useState("0.95");
 
-  const outcome = useMemo(():
-    | { result: TestResult; explanation: string[]; code: string }
-    | { error: string } => {
+  const outcome = useMemo((): Outcome => {
     try {
       const x = parseNumbers(xText);
       const y = kind === "one-sample" ? [] : parseNumbers(yText);
@@ -128,11 +122,38 @@ export default function TTestDemo() {
   }
 
   return (
-    <section style={{ display: "grid", gap: "1rem", maxWidth: "40rem" }}>
+    <TTestContext
+      value={{
+        kind,
+        changeKind,
+        xText,
+        setXText,
+        yText,
+        setYText,
+        mu,
+        setMu,
+        alternative,
+        setAlternative,
+        confidence,
+        setConfidence,
+        outcome,
+      }}
+    >
+      {children}
+    </TTestContext>
+  );
+}
 
+const field = { display: "grid", gap: "0.25rem" } as const;
+
+/** The inputs. */
+export function TTestForm() {
+  const s = useTTest();
+  return (
+    <div style={{ display: "grid", gap: "1rem", maxWidth: "40rem" }}>
       <label style={field}>
         Test
-        <select value={kind} onChange={(e) => changeKind(e.target.value as Kind)}>
+        <select value={s.kind} onChange={(e) => s.changeKind(e.target.value as Kind)}>
           <option value="one-sample">One-sample</option>
           <option value="paired">Paired</option>
           <option value="welch">Two-sample (Welch)</option>
@@ -140,30 +161,26 @@ export default function TTestDemo() {
         </select>
       </label>
 
-      <p>
-        <strong>When to use it:</strong> {PURPOSE[kind]}
-      </p>
-
       <label style={field}>
-        {kind === "one-sample" ? "Sample" : "First sample (x)"}
-        <textarea rows={3} value={xText} onChange={(e) => setXText(e.target.value)} />
+        {s.kind === "one-sample" ? "Sample" : "First sample (x)"}
+        <textarea rows={3} value={s.xText} onChange={(e) => s.setXText(e.target.value)} />
       </label>
 
-      {kind !== "one-sample" && (
+      {s.kind !== "one-sample" && (
         <label style={field}>
           Second sample (y)
-          <textarea rows={3} value={yText} onChange={(e) => setYText(e.target.value)} />
+          <textarea rows={3} value={s.yText} onChange={(e) => s.setYText(e.target.value)} />
         </label>
       )}
 
       <label style={field}>
-        {kind === "one-sample" ? "Hypothesised mean" : "Hypothesised difference (x − y)"}
-        <input type="number" step="any" value={mu} onChange={(e) => setMu(e.target.value)} />
+        {s.kind === "one-sample" ? "Hypothesised mean" : "Hypothesised difference (x − y)"}
+        <input type="number" step="any" value={s.mu} onChange={(e) => s.setMu(e.target.value)} />
       </label>
 
       <label style={field}>
         Alternative hypothesis
-        <select value={alternative} onChange={(e) => setAlternative(e.target.value as Alternative)}>
+        <select value={s.alternative} onChange={(e) => s.setAlternative(e.target.value as Alternative)}>
           <option value="two-sided">Two-sided: different, in either direction</option>
           <option value="less">Less: lower than the hypothesised value</option>
           <option value="greater">Greater: higher than the hypothesised value</option>
@@ -172,37 +189,56 @@ export default function TTestDemo() {
 
       <label style={field}>
         Confidence level
-        <select value={confidence} onChange={(e) => setConfidence(e.target.value)}>
+        <select value={s.confidence} onChange={(e) => s.setConfidence(e.target.value)}>
           <option value="0.9">90%</option>
           <option value="0.95">95%</option>
           <option value="0.99">99%</option>
         </select>
       </label>
+    </div>
+  );
+}
 
-      {"error" in outcome ? (
-        <p role="alert" className="error">{outcome.error}</p>
-      ) : (
-        <>
-          <h3>What it means</h3>
-          {outcome.explanation.map((sentence) => (
-            <p key={sentence}>{sentence}</p>
-          ))}
+/** The result table, or the error message if the input isn't valid. */
+export function TTestResults() {
+  const { outcome } = useTTest();
+  return "error" in outcome ? (
+    <p role="alert" className="error">
+      {outcome.error}
+    </p>
+  ) : (
+    <pre>{summarize(outcome.result)}</pre>
+  );
+}
 
-          <h3>Result</h3>
-          <pre>{summarize(outcome.result)}</pre>
+/** The plain-language explanation. */
+export function TTestMeaning() {
+  const { outcome } = useTTest();
+  if ("error" in outcome) return <p className="muted">{messages.needsValidData}</p>;
+  return (
+    <>
+      {outcome.explanation.map((sentence) => (
+        <p key={sentence}>{sentence}</p>
+      ))}
+    </>
+  );
+}
 
-          <h3>Use it in your code</h3>
-          <p>
-            Install with <code>npm install statinfer</code>, then:
-          </p>
-          <pre>{outcome.code}</pre>
+/** The JavaScript code that reproduces the result. */
+export function TTestCode() {
+  const { outcome } = useTTest();
+  if ("error" in outcome) return <p className="muted">{messages.needsValidData}</p>;
+  return <pre>{outcome.code}</pre>;
+}
 
-          <details>
-            <summary>Raw result (JSON)</summary>
-            <pre>{JSON.stringify(outcome.result, null, 2)}</pre>
-          </details>
-        </>
-      )}
-    </section>
+/** The raw result object, as JSON, in a collapsible box. */
+export function TTestJson() {
+  const { outcome } = useTTest();
+  if ("error" in outcome) return <p className="muted">{messages.needsValidData}</p>;
+  return (
+    <details>
+      <summary>Show the raw result as JSON</summary>
+      <pre>{JSON.stringify(outcome.result, null, 2)}</pre>
+    </details>
   );
 }

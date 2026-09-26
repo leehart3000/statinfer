@@ -1,4 +1,4 @@
-import TTestDemo from "./ttest-demo";
+import { TTestCode, TTestDemo, TTestForm, TTestJson, TTestMeaning, TTestResults } from "./ttest-demo";
 
 export const metadata = { title: "t-test demo" };
 
@@ -6,6 +6,57 @@ export const metadata = { title: "t-test demo" };
 
 [statinfer](https://www.npmjs.com/package/statinfer) is a JavaScript package for statistical tests, with TypeScript types included. It runs in Node.js and in the browser.
 
-This page demonstrates its `tTest` function. Enter your own numbers below, and statinfer calculates the result right here in your browser, explains what it means, and shows the JavaScript code that produces it.
+This page demonstrates its `tTest` function, which compares averages. Enter your own numbers below: statinfer calculates the result right here in your browser, explains what it means, and shows the JavaScript code that produces it.
 
-<TTestDemo />
+**On this page:** [Try it](#try-it) · [Results](#results) · [What the results mean](#what-the-results-of-a-t-test-mean) · [When to use a t-test](#when-to-use-a-t-test) · [Use it in your code](#how-to-use-statinfer-s-t-test-in-your-javascript-code) · [Further reading](#further-reading)
+
+<TTestDemo>
+
+## Try it
+
+<TTestForm />
+
+## Results
+
+<TTestResults />
+
+## What the results of a t-test mean
+
+<TTestMeaning />
+
+## When to use a t-test
+
+A t-test compares **averages (means)**. It asks whether a difference is bigger than you'd expect from random variation alone. There are four kinds:
+
+- **One-sample:** is the average of one group different from a target value? For example, does a machine fill bottles with 500 ml on average?
+- **Paired:** did the same subjects change between two measurements? For example, blood pressure before and after a treatment, for the same patients.
+- **Two-sample (Welch):** do two separate groups have different averages? For example, test scores of two classes. This is the usual choice, because it doesn't assume the groups are equally spread out.
+- **Two-sample (pooled variance):** the same question, but assuming both groups are equally spread out. Only use it when you have a good reason to believe that.
+
+t-tests work best when the measurements are independent of each other, and either roughly bell-shaped or from reasonably large samples. For small samples with outliers or very skewed data, a rank-based test is more reliable. The Wilcoxon test is planned for a future version of statinfer.
+
+## How to use statinfer's t-test in your JavaScript code
+
+Install statinfer from npm:
+
+```sh
+npm install statinfer
+```
+
+This JavaScript code reproduces the result above. It also works unchanged in TypeScript, where statinfer's built-in types give you autocompletion and type checking.
+
+<TTestCode />
+
+### The raw result
+
+`tTest` returns a plain JavaScript object, which your code can use directly. For example, `result.pValue` is the p-value. Below, the same object is shown as **JSON** (JavaScript Object Notation), a standard text format for data, which you can save or send to other programs. One thing to know: JSON can't represent infinity, so an open-ended confidence interval shows `null` for its missing end.
+
+<TTestJson />
+
+## Further reading
+
+- [One-sample t-test](https://www.itl.nist.gov/div898/handbook/prc/section2/prc22.htm), in the NIST/SEMATECH e-Handbook of Statistical Methods
+- [Two-sample t-test for equal means](https://itl.nist.gov/div898/handbook/eda/section3/eda353.htm), in the same handbook, which covers both equal and unequal variances
+- [Student's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test) and [Welch's t-test](https://en.wikipedia.org/wiki/Welch%27s_t-test), on Wikipedia
+
+</TTestDemo>
