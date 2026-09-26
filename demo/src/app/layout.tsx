@@ -4,8 +4,9 @@ import SiteHeader from "@/components/site-header";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "statinfer demo", template: "%s | statinfer demo" },
+  title: { default: "statinfer - demo", template: "statinfer - demo - %s" },
   description: "Try statinfer, statistical inference for JavaScript and TypeScript, in your browser.",
+  icons: { icon: "/logo.svg" },
 };
 
 // Runs before the page is shown, so a saved light or dark choice applies without a flash.

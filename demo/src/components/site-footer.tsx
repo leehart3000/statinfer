@@ -1,18 +1,16 @@
+import ExternalLink from "./external-link";
+
 export default function SiteFooter() {
   return (
     <footer className="site-footer">
-      <ul>
-        <li>
-          <a href="https://www.npmjs.com/package/statinfer">npm</a>
-        </li>
-        <li>
-          <a href="https://github.com/leehart3000/statinfer">GitHub</a>
-        </li>
-        <li>
-          <a href="https://github.com/leehart3000/statinfer/blob/main/CONTRIBUTING.md">Contributing</a>
-        </li>
-      </ul>
-      <p>statinfer is open source, under the Apache 2.0 licence.</p>
+      <p>
+        <ExternalLink href="https://www.npmjs.com/package/statinfer">statinfer</ExternalLink> is{" "}
+        <ExternalLink href="https://github.com/leehart3000/statinfer">open source</ExternalLink> under the{" "}
+        <ExternalLink href="https://github.com/leehart3000/statinfer/blob/main/LICENSE">
+          Apache 2.0 licence
+        </ExternalLink>
+        .
+      </p>
     </footer>
   );
 }

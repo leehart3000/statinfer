@@ -22,8 +22,12 @@ export default function ThemeToggle() {
 
   return (
     <button type="button" className="theme-toggle" onClick={toggle}>
-      <span className="to-dark">Dark mode</span>
-      <span className="to-light">Light mode</span>
+      <span className="to-dark">
+        <span aria-hidden="true">🌙</span> Dark
+      </span>
+      <span className="to-light">
+        <span aria-hidden="true">☀️</span> Light
+      </span>
     </button>
   );
 }

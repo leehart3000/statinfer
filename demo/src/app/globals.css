@@ -9,6 +9,7 @@
   --link: #1d4ed8;
   --link-hover: #1e40af;
   --error: #b91c1c;
+  --chrome: #f7f7fa;
 }
 
 :root[data-theme="dark"] {
@@ -21,6 +22,7 @@
   --link: #7aa7ff;
   --link-hover: #a5c3ff;
   --error: #f87171;
+  --chrome: #181b20;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,6 +36,7 @@
     --link: #7aa7ff;
     --link-hover: #a5c3ff;
     --error: #f87171;
+    --chrome: #181b20;
   }
 }
 
@@ -171,4 +174,33 @@ summary {
   :root:not([data-theme]) .theme-toggle .to-light {
     display: inline;
   }
+}
+
+/* Header and footer */
+.site-header,
+.site-footer {
+  background: var(--chrome);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* Text for screen readers only */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
