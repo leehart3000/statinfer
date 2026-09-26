@@ -1,8 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" rx="7" fill="#1d4ed8"/>
+  <!-- shaded tails under the bell curve: the "extreme results" behind a p-value -->
+  <g fill="#fff" fill-opacity="0.4">
+    <path d="M4 22C6.1 22 7.65 20.29 9 18.05V22Z"/>
+    <path d="M28 22C25.9 22 24.35 20.29 23 18.05V22Z"/>
+  </g>
   <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
     <!-- italic "s" -->
-    <path d="M8.7 6.3c-.3-.8-1.2-1.1-2-1-1 .1-1.6.8-1.4 1.5.2.8 1.1 1.1 1.8 1.4.8.3 1.3.8 1.1 1.6-.2.8-1.1 1.3-2.1 1.2-.8-.1-1.4-.5-1.6-1.1" stroke-width="1.3"/>
+    <path d="M8.7 8.9c-.3-.8-1.2-1.1-2-1-1 .1-1.6.8-1.4 1.5.2.8 1.1 1.1 1.8 1.4.8.3 1.3.8 1.1 1.6-.2.8-1.1 1.3-2.1 1.2-.8-.1-1.4-.5-1.6-1.1" stroke-width="1.3"/>
     <!-- italic "i", with a curved entry at the top and a tail at the bottom -->
     <path d="M24.3 8.6c.4-.5 1.1-.8 1.4-.4.2.2.1.6 0 1l-1 3.6c-.1.5.1.8.5.8.4 0 .8-.3 1.1-.7" stroke-width="1.3"/>
     <!-- bell curve, and a confidence-interval bracket -->
