@@ -41,3 +41,6 @@ updates:
       # Keep Node types matching the Node version Vercel runs (24).
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
+      # eslint-plugin-react (used by Next.js's ESLint config) doesn't support ESLint 10 yet.
+      - dependency-name: eslint
+        update-types: ["version-update:semver-major"]
