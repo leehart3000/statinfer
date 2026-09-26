@@ -92,6 +92,10 @@ pnpm docs:api    # build API docs into api-docs/
 pnpm fixtures    # regenerate reference values (needs uv)
 ```
 
+## Contributing
+
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for how to set up, test and submit changes, and [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
+
 ## License
 
 [Apache-2.0](LICENSE)

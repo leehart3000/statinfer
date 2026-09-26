@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# statinfer demo
 
-## Getting Started
+The interactive demo site for [statinfer](https://www.npmjs.com/package/statinfer), live at https://statinfer.vercel.app/.
 
-First, run the development server:
+It's a [Next.js](https://nextjs.org) app that installs statinfer from npm, like any other user would. So the demo only shows **released** features.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Running it locally
+
+From the repository root:
+
+```sh
+pnpm -C demo install
+pnpm -C demo dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+From the repository root, `pnpm demo:check` installs, lints and builds the demo. CI runs the same checks on every pull request.
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+Vercel deploys `main` to https://statinfer.vercel.app/, and builds a preview of every pull request. The Vercel project uses `demo` as its root directory, and sets `ENABLE_EXPERIMENTAL_COREPACK=1` so that it uses the pnpm version pinned in `package.json`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Trying unreleased library changes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To check how the demo works with library changes that haven't been released yet, temporarily install a locally built package. From the repository root:
 
-## Deploy on Vercel
+```sh
+pnpm build && pnpm pack
+pnpm -C demo add ../statinfer-<version>.tgz
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Don't commit this.** When you're done, put the demo back on the published version:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```sh
+git checkout demo/package.json demo/pnpm-lock.yaml
+pnpm -C demo install
+rm statinfer-*.tgz
+```
