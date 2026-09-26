@@ -216,3 +216,7 @@ body {
   flex: 1;
   width: 100%;
 }
+
+.muted {
+  color: var(--muted);
+}

@@ -2,17 +2,17 @@
   <rect width="32" height="32" rx="7" fill="#1d4ed8"/>
   <!-- shaded tails under the bell curve: the "extreme results" behind a p-value -->
   <g fill="#fff" fill-opacity="0.4">
-    <path d="M4 22C8.8 22 10.72 13.04 13.6 9.46V22Z"/>
-    <path d="M28 22C23.2 22 21.28 13.04 18.4 9.46V22Z"/>
+    <path d="M4 22C7.6 22 9.58 17.68 11.56 14.22V22Z"/>
+    <path d="M28 22C24.4 22 22.42 17.68 20.44 14.22V22Z"/>
   </g>
   <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
     <!-- italic "s", enlarged 1.35x from its baseline -->
     <path d="M8.7 7.4c-.3-.8-1.2-1.1-2-1-1 .1-1.6.8-1.4 1.5.2.8 1.1 1.1 1.8 1.4.8.3 1.3.8 1.1 1.6-.2.8-1.1 1.3-2.1 1.2-.8-.1-1.4-.5-1.6-1.1" stroke-width="0.96" transform="translate(6.6 12.1) scale(1.35) translate(-6.6 -12.1)"/>
     <!-- italic "i", with a curved entry at the top and a tail at the bottom -->
     <path d="M24.3 7.1c.4-.5 1.1-.8 1.4-.4.2.2.1.6 0 1l-1 3.6c-.1.5.1.8.5.8.4 0 .8-.3 1.1-.7" stroke-width="1.3"/>
-    <!-- bell curve, and a confidence-interval bracket -->
-    <path d="M4 22c6 0 7.5-14 12-14s6 14 12 14" stroke-width="1.5"/>
-    <path d="M10 26.5h12M10 25v3M22 25v3" stroke-width="1.2"/>
+    <!-- bell curve, and a confidence-interval bracket spanning the unshaded middle -->
+    <path d="M4 22c6 0 7.5-12 12-12s6 12 12 12" stroke-width="1.5"/>
+    <path d="M11.56 26.5h8.88M11.56 25v3M20.44 25v3" stroke-width="1.2"/>
   </g>
   <circle cx="26.3" cy="4.5" r="0.9" fill="#fff"/>
 </svg>
