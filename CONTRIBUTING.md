@@ -20,7 +20,7 @@ For security problems, please **don't** open a public issue. See [SECURITY.md](S
 | `test/fixtures/` | Reference results generated from SciPy and statsmodels |
 | `scripts/` | The Python script that generates those fixtures (a uv project) |
 | `stubs/` | Build-time stand-ins, e.g. a no-op `debug` used when bundling stdlib |
-| `demo/` | The Next.js demo site, deployed at https://statinfer.vercel.app/ |
+| `demo/` | The Next.js demo site, deployed at https://statinfer.vercel.app/ (see [demo/README.md](demo/README.md)) |
 | `.github/` | CI, release and security workflows, and Dependabot settings |
 
 ## Setting up
