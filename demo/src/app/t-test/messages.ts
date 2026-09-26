@@ -40,7 +40,7 @@ export const messages = {
     `The ${level} confidence interval says the ${quantity} is at least ${low}.`,
 
   intervalBetween: (level: string, quantity: string, low: string, high: string) =>
-    `The ${level} confidence interval, ${low} to ${high}, is the range of values for the ${quantity} that are consistent with your data.`,
+    `The ${level} confidence interval, ${low} to ${high}, is the range of values for the ${quantity} that are consistent with the demo data.`,
 
   needsValidData: "Enter valid data above to see this.",
 };
