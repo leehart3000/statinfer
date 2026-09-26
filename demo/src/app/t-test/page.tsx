@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import TTestDemo from "./ttest-demo";
 
-export const metadata: Metadata = { title: "t-test" };
+export const metadata: Metadata = { title: "t-test demo" };
 
 export default function TTestPage() {
   return (

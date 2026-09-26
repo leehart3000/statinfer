@@ -4,7 +4,7 @@ import SiteHeader from "@/components/site-header";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "statinfer - demo", template: "statinfer - demo - %s" },
+  title: { default: "statinfer - demo", template: "statinfer - %s" },
   description: "Try statinfer, statistical inference for JavaScript and TypeScript, in your browser.",
   icons: { icon: "/logo.svg" },
 };
