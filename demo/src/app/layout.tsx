@@ -1,26 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import SiteFooter from "@/components/site-footer";
+import SiteHeader from "@/components/site-header";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "statinfer demo",
+  title: { default: "statinfer - demo", template: "statinfer - %s" },
   description: "Try statinfer, statistical inference for JavaScript and TypeScript, in your browser.",
+  icons: { icon: "/logo.svg" },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+// Runs before the page is shown, so a saved light or dark choice applies without a flash.
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body>
+        <SiteHeader />
+        <main className="site-main">{children}</main>
+        <SiteFooter />
+      </body>
     </html>
   );
 }

@@ -129,7 +129,6 @@ export default function TTestDemo() {
 
   return (
     <section style={{ display: "grid", gap: "1rem", maxWidth: "40rem" }}>
-      <h2>t-test</h2>
 
       <label style={field}>
         Test
@@ -181,7 +180,7 @@ export default function TTestDemo() {
       </label>
 
       {"error" in outcome ? (
-        <p role="alert" style={{ color: "crimson" }}>{outcome.error}</p>
+        <p role="alert" className="error">{outcome.error}</p>
       ) : (
         <>
           <h3>What it means</h3>
