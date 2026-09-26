@@ -32,10 +32,32 @@ pnpm build && pnpm pack
 pnpm -C demo add ../statinfer-<version>.tgz
 ```
 
-**Don't commit this.** When you're done, put the demo back on the published version:
+The `../` is relative to `demo/`, because `-C demo` runs pnpm there.
+
+Check that the demo is now using your local build:
+
+```sh
+readlink demo/node_modules/statinfer
+```
+
+The path should mention `file+..+statinfer-<version>.tgz`. If it just says `statinfer@<version>`, the demo is still using the published package.
+
+Then run the demo, with either the development server or a production build:
+
+```sh
+pnpm -C demo dev
+# or, closer to what Vercel serves:
+pnpm -C demo build && pnpm -C demo start
+```
+
+Open http://localhost:3000, and stop the server with Ctrl+C when you're done.
+
+**Don't commit this.** Put the demo back on the published version:
 
 ```sh
 git checkout demo/package.json demo/pnpm-lock.yaml
 pnpm -C demo install
 rm statinfer-*.tgz
 ```
+
+`git status` should then show a clean working tree.
