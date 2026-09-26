@@ -20,7 +20,7 @@ export const messages = {
     greater: (quantity: string, mu: number) => `the ${quantity} is greater than ${mu}`,
   } satisfies Record<Alternative, (quantity: string, mu: number) => string>,
 
-  estimate: (value: string) => `The estimate from your data is ${value}.`,
+  estimate: (value: string) => `The estimate from the demo data is ${value}.`,
 
   pValue: (quantity: string, mu: number, p: string) =>
     `If the ${quantity} really were ${mu}, the chance of getting a result at least this extreme is ${p}. That's the p-value.`,
