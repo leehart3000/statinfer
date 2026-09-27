@@ -28,6 +28,7 @@ export function explainResult(result: TestResult, quantity: string, hypothesised
           : messages.intervalBetween(level, quantity, fmt(low), fmt(high)),
     );
   }
+  sentences.push(messages.trueMeaning);
   return sentences;
 }
 

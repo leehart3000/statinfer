@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { demos } from "@/demos";
+import NavLinks from "./nav-links";
 import ThemeToggle from "./theme-toggle";
 
 export default function SiteHeader() {
@@ -11,13 +11,7 @@ export default function SiteHeader() {
         statinfer
       </Link>
       <nav aria-label="Demos">
-        <ul>
-          {demos.map((demo) => (
-            <li key={demo.slug}>
-              <Link href={`/${demo.slug}`}>{demo.title}</Link>
-            </li>
-          ))}
-        </ul>
+        <NavLinks />
       </nav>
       <ThemeToggle />
     </header>

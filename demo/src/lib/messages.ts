@@ -45,5 +45,8 @@ export const messages = {
   notSignificantThat: (claim: string, nullHypothesis: string) =>
     `That's not below 0.05, so at the common 5% level there isn't enough evidence that ${claim}. That doesn't prove that ${nullHypothesis}; the data just can't tell.`,
 
+  trueMeaning:
+    '"True" here means the value for the whole population that the demo data entered above are a sample from, rather than just for those numbers.',
+
   needsValidData: "Enter valid demo data above to see this.",
 };
