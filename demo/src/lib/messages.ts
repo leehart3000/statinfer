@@ -34,5 +34,16 @@ export const messages = {
   intervalBetween: (level: string, quantity: string, low: string, high: string) =>
     `The ${level} confidence interval, ${low} to ${high}, is the range of values for the ${quantity} that are consistent with the demo data entered above.`,
 
+  statistic: (name: string, value: string, df: string | null) =>
+    df === null
+      ? `The ${name} statistic from the demo data entered above is ${value}.`
+      : `The ${name} statistic from the demo data entered above is ${value}, with ${df} degrees of freedom.`,
+
+  pValueIf: (nullHypothesis: string, p: string) =>
+    `If ${nullHypothesis}, the chance of getting a result at least this extreme is ${p}. That's the p-value.`,
+
+  notSignificantThat: (claim: string, nullHypothesis: string) =>
+    `That's not below 0.05, so at the common 5% level there isn't enough evidence that ${claim}. That doesn't prove that ${nullHypothesis}; the data just can't tell.`,
+
   needsValidData: "Enter valid demo data above to see this.",
 };

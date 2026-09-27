@@ -1,0 +1,63 @@
+import { DemoCode, DemoJson, DemoMeaning, DemoResults } from "@/components/demo-outcome";
+import { ChiSquareDemo, ChiSquareForm } from "./chi-square-demo";
+
+export const metadata = { title: "chi-square test demo" };
+
+# chi-square test demo
+
+[statinfer](https://www.npmjs.com/package/statinfer) is a JavaScript package for statistical tests, with TypeScript types included. It runs in Node.js and in the browser.
+
+This page demonstrates its `chiSquareTest` function, which tests counts in categories. Enter your own counts below: statinfer calculates the result right here in your browser, explains what it means, and shows the JavaScript code that produces it.
+
+**On this page:** [When to use a chi-square test](#when-to-use-a-chi-square-test) · [Demo data](#demo-data) · [Demo results](#demo-results) · [What the results mean](#what-the-results-of-a-chi-square-test-mean) · [How to use it](#how-to-use-statinfer-s-chi-square-test-in-your-javascript-code) · [Further reading](#further-reading)
+
+<ChiSquareDemo>
+
+## When to use a chi-square test
+
+A chi-square test works with **counts**: how many things fall into each category. It compares the counts you observed with the counts you'd expect if nothing interesting were going on. There are two kinds:
+
+- **Independence:** given a table of counts, are the rows and columns related? For example, with rows for two age groups and columns for preferring tea or coffee, does preference depend on age?
+- **Goodness-of-fit:** do the counts in each category match the proportions you expected? For example, after 100 rolls of a four-sided die, do the counts fit a fair die, where each side comes up equally often?
+
+The test relies on an approximation that needs reasonably large counts. A common rule of thumb is an **expected** count of at least 5 in each cell. For 2×2 tables with small counts, Fisher's exact test is more reliable. For 2×2 tables, statinfer applies **Yates' continuity correction** by default, like SciPy and R, which makes the test slightly more cautious. You can turn it off in the demo.
+
+## Demo data
+
+<ChiSquareForm />
+
+## Demo results
+
+<DemoResults />
+
+## What the results of a chi-square test mean
+
+<DemoMeaning />
+
+## How to use statinfer's chi-square test in your JavaScript code
+
+Install statinfer from npm:
+
+```sh
+npm install statinfer
+```
+
+This JavaScript code reproduces the result above. It also works unchanged in TypeScript, where statinfer's built-in types give you autocompletion and type checking.
+
+<DemoCode />
+
+For every option `chiSquareTest` accepts, see [its API documentation](https://leehart3000.github.io/statinfer/functions/chiSquareTest.html).
+
+### The raw result
+
+`chiSquareTest` returns a plain JavaScript object, which your code can use directly. For example, `result.pValue` is the p-value. Below, the same object is shown as **JSON** (JavaScript Object Notation), a standard text format for data, which you can save or send to other programs. A chi-square test has no estimate, confidence interval or direction, so those fields are `null`.
+
+<DemoJson />
+
+## Further reading
+
+- [Do all the processes have the same proportion of defectives?](https://itl.nist.gov/div898/handbook/prc/section4/prc46.htm), a chi-square test on a table of counts, in the NIST/SEMATECH e-Handbook of Statistical Methods
+- [Pearson's chi-squared test](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test), on Wikipedia, covering both independence and goodness-of-fit
+- [Yates's correction for continuity](https://en.wikipedia.org/wiki/Yates%27s_correction_for_continuity), on Wikipedia
+
+</ChiSquareDemo>

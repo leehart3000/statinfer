@@ -238,3 +238,9 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

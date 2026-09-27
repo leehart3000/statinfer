@@ -23,4 +23,9 @@ export const demos: Demo[] = [
     title: "correlation test",
     summary: "Measure how strongly two measurements move together, with Pearson's or Spearman's method.",
   },
+  {
+    slug: "chi-square-test",
+    title: "chi-square test",
+    summary: "Test counts in categories: whether two factors are related, or whether counts match expected proportions.",
+  },
 ];
