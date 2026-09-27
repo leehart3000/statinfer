@@ -24,7 +24,7 @@ jobs:
           node-version: 24
       - run: pnpm install --frozen-lockfile
       - run: pnpm docs:api
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: api-docs
 
