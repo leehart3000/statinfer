@@ -28,5 +28,30 @@ export function explainResult(result: TestResult, quantity: string, hypothesised
           : messages.intervalBetween(level, quantity, fmt(low), fmt(high)),
     );
   }
+  sentences.push(messages.trueMeaning);
   return sentences;
+}
+
+/** Test-specific wording for a result without an estimate. */
+export interface TestWording {
+  /** The statistic's name, e.g. "chi-square". */
+  statistic: string;
+  /** The "nothing going on" assumption, phrased to follow "If…", e.g. "the rows and columns are unrelated". */
+  nullHypothesis: string;
+  /** What a small p-value is evidence for, e.g. "the rows and columns are related". */
+  claim: string;
+}
+
+/** Plain-language sentences for a result that has a statistic and p-value, but no estimate. */
+export function explainTest(result: TestResult, wording: TestWording): string[] {
+  const p = result.pValue < 0.001 ? messages.pVerySmall : fmt(result.pValue);
+  const df =
+    result.df === null ? null : typeof result.df === "number" ? fmt(result.df) : result.df.map(fmt).join(" and ");
+  return [
+    messages.statistic(wording.statistic, fmt(result.statistic), df),
+    messages.pValueIf(wording.nullHypothesis, p),
+    result.pValue < 0.05
+      ? messages.significant(wording.claim)
+      : messages.notSignificantThat(wording.claim, wording.nullHypothesis),
+  ];
 }

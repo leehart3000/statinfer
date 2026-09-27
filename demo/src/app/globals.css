@@ -7,7 +7,7 @@
   --border: #d9d9e0;
   --surface: #f4f4f7;
   --link: #1d4ed8;
-  --link-hover: #1e40af;
+  --link-hover: #1e3a8a;
   --error: #b91c1c;
   --chrome: #f7f7fa;
 }
@@ -61,6 +61,9 @@ a {
 
 a:hover {
   color: var(--link-hover);
+  text-decoration-thickness: 2px;
+  background-color: color-mix(in srgb, var(--link) 12%, transparent);
+  border-radius: 2px;
 }
 
 /* Code and results in shaded boxes */
@@ -237,4 +240,16 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* The current page's link in the header */
+.site-header nav a[aria-current="page"] {
+  color: var(--fg);
+  text-decoration-thickness: 2px;
 }

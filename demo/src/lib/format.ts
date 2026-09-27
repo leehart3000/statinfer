@@ -16,3 +16,12 @@ export function parseNumber(text: string, label: string): number {
   if (text.trim() === "" || !Number.isFinite(value)) throw new Error(`${label} must be a number`);
   return value;
 }
+
+/** Turns "1, 2\n3, 4" into [[1, 2], [3, 4]]: one row per line. */
+export function parseTable(text: string): number[][] {
+  return text
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map(parseNumbers);
+}
