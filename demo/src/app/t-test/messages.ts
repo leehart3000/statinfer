@@ -20,7 +20,7 @@ export const messages = {
     greater: (quantity: string, mu: number) => `the ${quantity} is greater than ${mu}`,
   } satisfies Record<Alternative, (quantity: string, mu: number) => string>,
 
-  estimate: (value: string) => `The estimate from the demo data is ${value}.`,
+  estimate: (value: string) => `The estimate from the demo data entered above is ${value}.`,
 
   pValue: (quantity: string, mu: number, p: string) =>
     `If the ${quantity} really were ${mu}, the chance of getting a result at least this extreme is ${p}. That's the p-value.`,
@@ -40,7 +40,7 @@ export const messages = {
     `The ${level} confidence interval says the ${quantity} is at least ${low}.`,
 
   intervalBetween: (level: string, quantity: string, low: string, high: string) =>
-    `The ${level} confidence interval, ${low} to ${high}, is the range of values for the ${quantity} that are consistent with the demo data.`,
+    `The ${level} confidence interval, ${low} to ${high}, is the range of values for the ${quantity} that are consistent with the demo data entered above.`,
 
   needsValidData: "Enter valid data above to see this.",
 };
