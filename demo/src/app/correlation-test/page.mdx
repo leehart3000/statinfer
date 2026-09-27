@@ -1,0 +1,67 @@
+import { DemoCode, DemoJson, DemoMeaning, DemoResults } from "@/components/demo-outcome";
+import { CorrelationDemo, CorrelationForm } from "./correlation-demo";
+
+export const metadata = { title: "correlation test demo" };
+
+# correlation test demo
+
+[statinfer](https://www.npmjs.com/package/statinfer) is a JavaScript package for statistical tests, with TypeScript types included. It runs in Node.js and in the browser.
+
+This page demonstrates its `correlationTest` function, which measures how strongly two measurements move together. Enter your own pairs of numbers below: statinfer calculates the result right here in your browser, explains what it means, and shows the JavaScript code that produces it.
+
+**On this page:** [When to use a correlation test](#when-to-use-a-correlation-test) · [Demo data](#demo-data) · [Demo results](#demo-results) · [What the results mean](#what-the-results-of-a-correlation-test-mean) · [How to use it](#how-to-use-statinfer-s-correlation-test-in-your-javascript-code) · [Further reading](#further-reading)
+
+<CorrelationDemo>
+
+## When to use a correlation test
+
+A correlation test asks whether **two measurements of the same things move together**. For example: do taller people tend to weigh more, or do students who study longer tend to score higher? Each x value must be paired with the y value in the same position.
+
+The result, the **correlation**, runs from −1 to 1. A value near 1 means y rises steadily as x rises, near −1 means y falls steadily, and near 0 means no consistent relationship. The test asks whether the correlation in your data is strong enough to be more than chance. There are two methods:
+
+- **Pearson** measures how closely the points follow a **straight line**. It's the usual choice, but a single extreme value can distort it.
+- **Spearman** first converts the values to ranks (1st, 2nd, 3rd…), then measures how consistently y rises or falls with x, even along a curve. That makes it robust to outliers.
+
+Correlation doesn't show that one thing *causes* the other: both might be driven by something else. A correlation test also needs at least three pairs, and more pairs make the result far more reliable.
+
+## Demo data
+
+<CorrelationForm />
+
+## Demo results
+
+<DemoResults />
+
+The **statistic** in the table is a t-statistic, which statinfer calculates from the correlation to get the p-value. The correlation itself is the **estimate**.
+
+## What the results of a correlation test mean
+
+<DemoMeaning />
+
+## How to use statinfer's correlation test in your JavaScript code
+
+Install statinfer from npm:
+
+```sh
+npm install statinfer
+```
+
+This JavaScript code reproduces the result above. It also works unchanged in TypeScript, where statinfer's built-in types give you autocompletion and type checking.
+
+<DemoCode />
+
+For every option `correlationTest` accepts, see [its API documentation](https://leehart3000.github.io/statinfer/functions/correlationTest.html).
+
+### The raw result
+
+`correlationTest` returns a plain JavaScript object, which your code can use directly. For example, `result.estimate` is the correlation. Below, the same object is shown as **JSON** (JavaScript Object Notation), a standard text format for data, which you can save or send to other programs. For Spearman's method, `confidenceInterval` is `null`, because statinfer doesn't calculate one.
+
+<DemoJson />
+
+## Further reading
+
+- [Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient), on Wikipedia
+- [Spearman's rank correlation coefficient](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient), on Wikipedia
+- [Fisher transformation](https://en.wikipedia.org/wiki/Fisher_transformation), on Wikipedia, which is how statinfer calculates Pearson's confidence interval
+
+</CorrelationDemo>
