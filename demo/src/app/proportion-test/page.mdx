@@ -9,7 +9,7 @@ export const metadata = { title: "proportion test demo" };
 
 This page demonstrates its `proportionTest` function, which compares proportions: how often something happens out of a number of tries. Enter your own counts below: statinfer calculates the result right here in your browser, explains what it means, and shows the JavaScript code that produces it.
 
-**On this page:** [When to use a proportion test](#when-to-use-a-proportion-test) · [Demo](#demo) · [Demo results](#demo-results) · [What the results mean](#what-the-results-of-a-proportion-test-mean) · [How to use it](#how-to-use-statinfer-s-proportion-test-in-your-javascript-code) · [Further reading](#further-reading)
+**On this page:** [When to use a proportion test](#when-to-use-a-proportion-test) · [Demo data](#demo-data) · [Demo results](#demo-results) · [What the results mean](#what-the-results-of-a-proportion-test-mean) · [How to use it](#how-to-use-statinfer-s-proportion-test-in-your-javascript-code) · [Further reading](#further-reading)
 
 <ProportionDemo>
 
@@ -22,7 +22,7 @@ A proportion test compares **how often something happens**, when each try either
 
 statinfer's proportion test is a **z-test**, which relies on an approximation that works well when the counts are reasonably large. A common rule of thumb is at least 10 successes and 10 failures in each group. When comparing two groups with smaller counts, Fisher's exact test is more reliable. The confidence interval is the simple "Wald" interval, which can be inaccurate for small samples, or for proportions close to 0 or 1.
 
-## Demo
+## Demo data
 
 <ProportionForm />
 

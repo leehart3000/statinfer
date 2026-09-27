@@ -12,5 +12,5 @@ export function Field({ label, children }: { label: React.ReactNode; children: R
 
 /** Shown in a results section while the form's input isn't valid. */
 export function ValidDataNote() {
-  return <p className="muted">{messages.needsValidData}</p>;
+  return <p className="error">{messages.needsValidData}</p>;
 }
