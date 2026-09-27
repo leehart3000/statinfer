@@ -1,0 +1,5 @@
+/* The docs front page already shows the project name as its title,
+   so hide the README's own "# statinfer" heading there. */
+.tsd-typography > h1:first-child {
+  display: none;
+}

@@ -22,6 +22,16 @@ export type ChiSquareTestOptions = ChiSquareIndependenceOptions | ChiSquareGoodn
 
 /**
  * Chi-square test of independence (pass `table`) or goodness-of-fit (pass `observed`).
+ *
+ * @example Independence: are the rows and columns of a table of counts related?
+ * ```ts
+ * chiSquareTest({ table: [[12, 5], [7, 16]] });
+ * ```
+ *
+ * @example Goodness-of-fit: is a six-sided die fair?
+ * ```ts
+ * chiSquareTest({ observed: [8, 12, 9, 11, 10, 10] });
+ * ```
  */
 export function chiSquareTest(options: ChiSquareTestOptions): TestResult {
   return "table" in options ? independence(options) : goodnessOfFit(options);

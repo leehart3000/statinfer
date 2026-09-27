@@ -11,6 +11,11 @@ export interface FishersExactTestOptions {
 
 /**
  * Fisher's exact test for a 2×2 table. Reliable even with small counts.
+ *
+ * @example The "lady tasting tea" experiment
+ * ```ts
+ * fishersExactTest({ table: [[3, 1], [1, 3]], alternative: "greater" });
+ * ```
  */
 export function fishersExactTest({ table, alternative = "two-sided" }: FishersExactTestOptions): TestResult {
   if (table.length !== 2 || table.some((row) => row.length !== 2)) {

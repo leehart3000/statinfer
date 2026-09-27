@@ -3,6 +3,7 @@
   "entryPoints": ["src/index.ts"],
   "out": "api-docs",
   "name": "statinfer",
+  "customCss": "./typedoc.css",
   "treatWarningsAsErrors": true,
   "validation": {
     "notDocumented": true

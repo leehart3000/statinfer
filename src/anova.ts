@@ -10,6 +10,11 @@ export interface AnovaOptions {
 
 /**
  * One-way ANOVA: tests whether all groups have the same mean.
+ *
+ * @example Do three groups have the same average?
+ * ```ts
+ * anova({ groups: [[23, 25, 21, 27, 24], [30, 28, 33, 29], [22, 20, 24, 23, 21, 25]] });
+ * ```
  */
 export function anova({ groups }: AnovaOptions): TestResult {
   const k = groups.length;
