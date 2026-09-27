@@ -58,6 +58,8 @@ Every test takes a single options object and returns a `TestResult`:
 | `confidenceLevel` | For example `0.95`, or `null` |
 | `alternative` | `"two-sided"`, `"less"`, `"greater"`, or `null` |
 
+Full details of every function and option are in the [API documentation](https://leehart3000.github.io/statinfer/).
+
 Fields that don't apply to a test are `null`, so every result has the same shape. One-sided tests can have an infinite interval end; note that `JSON.stringify` saves `Infinity` as `null`.
 
 ## Accuracy

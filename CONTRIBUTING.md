@@ -114,6 +114,8 @@ sequenceDiagram
   NPM-->>NPM: The version goes live
 ```
 
+Publishing a release also rebuilds the [API documentation](https://leehart3000.github.io/statinfer/) on GitHub Pages, so it always matches the latest release on npm.
+
 ## Security practices
 
 - Never commit secrets. GitHub push protection and a TruffleHog workflow scan every push and pull request.
