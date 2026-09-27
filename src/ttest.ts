@@ -23,6 +23,24 @@ export interface TTestOptions {
 
 /**
  * Student's t-test: one-sample, paired, or two-sample (Welch or pooled).
+ *
+ * @example One sample: is the mean different from 5?
+ * ```ts
+ * const result = tTest({ x: [5.1, 4.9, 5.6, 5.8, 6.0, 5.5, 5.3, 6.2], mu: 5 });
+ * result.pValue; // 0.0099…
+ * ```
+ *
+ * @example Two groups (Welch's test, the default for two samples)
+ * ```ts
+ * tTest({ x: [5.1, 4.9, 5.6, 5.8, 6.0], y: [4.8, 5.0, 5.2, 4.7, 5.1] });
+ * ```
+ *
+ * @example Paired measurements, testing for a decrease
+ * ```ts
+ * const before = [72, 75, 71, 78, 74];
+ * const after = [70, 74, 68, 75, 73];
+ * tTest({ x: after, y: before, paired: true, alternative: "less" });
+ * ```
  */
 export function tTest(options: TTestOptions): TestResult {
   const {

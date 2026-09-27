@@ -20,6 +20,14 @@ export interface CorrelationTestOptions {
 
 /**
  * Tests whether x and y are correlated, using Pearson's r or Spearman's rho.
+ *
+ * @example
+ * ```ts
+ * const x = [2.1, 3.4, 1.9, 5.6, 4.2, 3.3];
+ * const y = [1.8, 3.9, 2.2, 5.1, 3.6, 3.5];
+ * correlationTest({ x, y }); // Pearson
+ * correlationTest({ x, y, method: "spearman" }); // Spearman, based on ranks
+ * ```
  */
 export function correlationTest(options: CorrelationTestOptions): TestResult {
   const { x, y, method = "pearson", alternative = "two-sided", confidenceLevel = 0.95 } = options;

@@ -19,6 +19,16 @@ export interface ProportionTestOptions {
 /**
  * z-test for one proportion, or for the difference between two proportions.
  * Two-sample tests check whether the two proportions are equal.
+ *
+ * @example One sample: is a coin that gave 58 heads in 100 flips fair?
+ * ```ts
+ * proportionTest({ successes: 58, trials: 100, p: 0.5 });
+ * ```
+ *
+ * @example Two groups: 45 of 120 compared with 30 of 110
+ * ```ts
+ * proportionTest({ successes: [45, 30], trials: [120, 110] });
+ * ```
  */
 export function proportionTest(options: ProportionTestOptions): TestResult {
   const { successes, trials, p = 0.5, alternative = "two-sided", confidenceLevel = 0.95 } = options;

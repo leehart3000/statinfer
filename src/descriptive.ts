@@ -1,4 +1,11 @@
-/** The arithmetic mean (average). Throws a `RangeError` for an empty array. */
+/**
+ * The arithmetic mean (average). Throws a `RangeError` for an empty array.
+ *
+ * @example
+ * ```ts
+ * mean([1, 2, 3]); // 2
+ * ```
+ */
 export function mean(values: readonly number[]): number {
   if (values.length === 0) {
     throw new RangeError("mean() needs at least one value");
@@ -8,7 +15,14 @@ export function mean(values: readonly number[]): number {
   return sum / values.length;
 }
 
-/** Sample variance (divides by n - 1). */
+/**
+ * Sample variance (divides by n - 1).
+ *
+ * @example
+ * ```ts
+ * variance([2, 4, 4, 4, 5, 5, 7, 9]); // 4.571… (that is, 32 / 7)
+ * ```
+ */
 export function variance(values: readonly number[]): number {
   if (values.length < 2) {
     throw new RangeError("variance() needs at least two values");
@@ -22,7 +36,14 @@ export function variance(values: readonly number[]): number {
   return sumOfSquares / (values.length - 1);
 }
 
-/** Sample standard deviation. */
+/**
+ * Sample standard deviation.
+ *
+ * @example
+ * ```ts
+ * standardDeviation([2, 4, 4, 4, 5, 5, 7, 9]); // 2.138…
+ * ```
+ */
 export function standardDeviation(values: readonly number[]): number {
   return Math.sqrt(variance(values));
 }
