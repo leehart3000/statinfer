@@ -1,0 +1,63 @@
+import { DemoCode, DemoJson, DemoMeaning, DemoResults } from "@/components/demo-outcome";
+import { ProportionDemo, ProportionForm } from "./proportion-demo";
+
+export const metadata = { title: "proportion test demo" };
+
+# proportion test demo
+
+[statinfer](https://www.npmjs.com/package/statinfer) is a JavaScript package for statistical tests, with TypeScript types included. It runs in Node.js and in the browser.
+
+This page demonstrates its `proportionTest` function, which compares proportions: how often something happens out of a number of tries. Enter your own counts below: statinfer calculates the result right here in your browser, explains what it means, and shows the JavaScript code that produces it.
+
+**On this page:** [When to use a proportion test](#when-to-use-a-proportion-test) · [Demo](#demo) · [Demo results](#demo-results) · [What the results mean](#what-the-results-of-a-proportion-test-mean) · [How to use it](#how-to-use-statinfer-s-proportion-test-in-your-javascript-code) · [Further reading](#further-reading)
+
+<ProportionDemo>
+
+## When to use a proportion test
+
+A proportion test compares **how often something happens**, when each try either succeeds or doesn't, such as a coin landing heads, a visitor buying something, or a part passing inspection. There are two kinds:
+
+- **One sample:** is a proportion different from a target value? For example, is a coin that landed heads 58 times in 100 flips a fair coin, with a proportion of 0.5?
+- **Two samples:** do two groups have different proportions? For example, did 45 of 120 visitors buy after seeing one design, compared with 30 of 110 after seeing another?
+
+statinfer's proportion test is a **z-test**, which relies on an approximation that works well when the counts are reasonably large. A common rule of thumb is at least 10 successes and 10 failures in each group. When comparing two groups with smaller counts, Fisher's exact test is more reliable. The confidence interval is the simple "Wald" interval, which can be inaccurate for small samples, or for proportions close to 0 or 1.
+
+## Demo
+
+<ProportionForm />
+
+## Demo results
+
+<DemoResults />
+
+## What the results of a proportion test mean
+
+<DemoMeaning />
+
+## How to use statinfer's proportion test in your JavaScript code
+
+Install statinfer from npm:
+
+```sh
+npm install statinfer
+```
+
+This JavaScript code reproduces the result above. It also works unchanged in TypeScript, where statinfer's built-in types give you autocompletion and type checking.
+
+<DemoCode />
+
+For every option `proportionTest` accepts, see [its API documentation](https://leehart3000.github.io/statinfer/functions/proportionTest.html).
+
+### The raw result
+
+`proportionTest` returns a plain JavaScript object, which your code can use directly. For example, `result.pValue` is the p-value. Below, the same object is shown as **JSON** (JavaScript Object Notation), a standard text format for data, which you can save or send to other programs. For one-sided tests, the confidence interval stops at a natural limit rather than at infinity: 0 or 1 for a proportion, and −1 or 1 for a difference between two proportions.
+
+<DemoJson />
+
+## Further reading
+
+- [Does the proportion of defectives meet requirements?](https://www.itl.nist.gov/div898/handbook/prc/section2/prc24.htm), testing one proportion, in the NIST/SEMATECH e-Handbook of Statistical Methods
+- [How can we determine whether two processes produce the same proportion of defectives?](https://itl.nist.gov/div898/handbook/prc/section3/prc33.htm), comparing two proportions, including Fisher's exact test, in the same handbook
+- [Binomial proportion confidence interval](https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval), on Wikipedia, which explains the Wald interval and its more accurate alternatives
+
+</ProportionDemo>

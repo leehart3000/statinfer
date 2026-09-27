@@ -1,10 +1,11 @@
 "use client";
 
 import { createContext, useContext, useMemo, useState } from "react";
-import { summarize, tTest, type Alternative, type TestResult } from "statinfer";
-import { Field, ValidDataNote } from "@/components/demo-ui";
+import { tTest, type Alternative } from "statinfer";
+import { OutcomeProvider, type Outcome } from "@/components/demo-outcome";
+import { Field } from "@/components/demo-ui";
 import { explainResult } from "@/lib/explain";
-import { parseNumbers } from "@/lib/format";
+import { parseNumber, parseNumbers } from "@/lib/format";
 import { quantity, type Kind } from "./messages";
 
 /** The statinfer code that reproduces the result, showing only non-default options. */
@@ -27,9 +28,7 @@ function codeFor(kind: Kind, x: number[], y: number[], mu: number, alternative: 
   ].join("\n");
 }
 
-type Outcome = { result: TestResult; explanation: string[]; code: string } | { error: string };
-
-interface TTestState {
+interface TTestInputs {
   kind: Kind;
   changeKind: (next: Kind) => void;
   xText: string;
@@ -42,18 +41,17 @@ interface TTestState {
   setAlternative: (alternative: Alternative) => void;
   confidence: string;
   setConfidence: (text: string) => void;
-  outcome: Outcome;
 }
 
-const TTestContext = createContext<TTestState | null>(null);
+const TTestContext = createContext<TTestInputs | null>(null);
 
-function useTTest(): TTestState {
-  const state = useContext(TTestContext);
-  if (!state) throw new Error("t-test components must be placed inside <TTestDemo>");
-  return state;
+function useTTest(): TTestInputs {
+  const inputs = useContext(TTestContext);
+  if (!inputs) throw new Error("<TTestForm> must be placed inside <TTestDemo>");
+  return inputs;
 }
 
-/** Holds the t-test's inputs and result, and shares them with the components inside it. */
+/** Holds the t-test's inputs, and shares them and the outcome with the components inside it. */
 export function TTestDemo({ children }: { children: React.ReactNode }) {
   const [kind, setKind] = useState<Kind>("one-sample");
   const [xText, setXText] = useState("5.1, 4.9, 5.6, 5.8, 6.0, 5.5, 5.3, 6.2");
@@ -66,8 +64,7 @@ export function TTestDemo({ children }: { children: React.ReactNode }) {
     try {
       const x = parseNumbers(xText);
       const y = kind === "one-sample" ? [] : parseNumbers(yText);
-      const muValue = Number(mu);
-      if (!Number.isFinite(muValue)) throw new Error("The hypothesised value must be a number");
+      const muValue = parseNumber(mu, "The hypothesised value");
       const confidenceLevel = Number(confidence);
       const result = tTest({
         x,
@@ -109,10 +106,9 @@ export function TTestDemo({ children }: { children: React.ReactNode }) {
         setAlternative,
         confidence,
         setConfidence,
-        outcome,
       }}
     >
-      {children}
+      <OutcomeProvider outcome={outcome}>{children}</OutcomeProvider>
     </TTestContext>
   );
 }
@@ -161,49 +157,5 @@ export function TTestForm() {
         </select>
       </Field>
     </div>
-  );
-}
-
-/** The result table, or the error message if the input isn't valid. */
-export function TTestResults() {
-  const { outcome } = useTTest();
-  return "error" in outcome ? (
-    <p role="alert" className="error">
-      {outcome.error}
-    </p>
-  ) : (
-    <pre>{summarize(outcome.result)}</pre>
-  );
-}
-
-/** The plain-language explanation. */
-export function TTestMeaning() {
-  const { outcome } = useTTest();
-  if ("error" in outcome) return <ValidDataNote />;
-  return (
-    <>
-      {outcome.explanation.map((sentence) => (
-        <p key={sentence}>{sentence}</p>
-      ))}
-    </>
-  );
-}
-
-/** The JavaScript code that reproduces the result. */
-export function TTestCode() {
-  const { outcome } = useTTest();
-  if ("error" in outcome) return <ValidDataNote />;
-  return <pre>{outcome.code}</pre>;
-}
-
-/** The raw result object, as JSON, in a collapsible box. */
-export function TTestJson() {
-  const { outcome } = useTTest();
-  if ("error" in outcome) return <ValidDataNote />;
-  return (
-    <details>
-      <summary>Show the raw result as JSON</summary>
-      <pre>{JSON.stringify(outcome.result, null, 2)}</pre>
-    </details>
   );
 }
