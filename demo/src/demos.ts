@@ -13,4 +13,9 @@ export const demos: Demo[] = [
     title: "t-test",
     summary: "Compare means: one sample against a target, paired measurements, or two groups.",
   },
+  {
+    slug: "proportion-test",
+    title: "proportion test",
+    summary: "Compare proportions: one group against a target, or two groups against each other.",
+  },
 ];

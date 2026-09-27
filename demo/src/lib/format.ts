@@ -9,3 +9,10 @@ export function parseNumbers(text: string): number[] {
 
 /** Rounds to 4 significant digits for display, e.g. 5.178800255 → "5.179". */
 export const fmt = (n: number) => String(Number(n.toPrecision(4)));
+
+/** Reads one number from a form field, or throws "<label> must be a number". */
+export function parseNumber(text: string, label: string): number {
+  const value = Number(text);
+  if (text.trim() === "" || !Number.isFinite(value)) throw new Error(`${label} must be a number`);
+  return value;
+}
