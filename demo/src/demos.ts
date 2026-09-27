@@ -18,4 +18,9 @@ export const demos: Demo[] = [
     title: "proportion test",
     summary: "Compare proportions: one group against a target, or two groups against each other.",
   },
+  {
+    slug: "correlation-test",
+    title: "correlation test",
+    summary: "Measure how strongly two measurements move together, with Pearson's or Spearman's method.",
+  },
 ];
