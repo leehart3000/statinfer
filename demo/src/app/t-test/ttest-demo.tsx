@@ -2,37 +2,10 @@
 
 import { createContext, useContext, useMemo, useState } from "react";
 import { summarize, tTest, type Alternative, type TestResult } from "statinfer";
-import { messages, type Kind } from "./messages";
-
-/** Turns "1, 2 3\n4" into [1, 2, 3, 4], or throws a readable error. */
-function parseNumbers(text: string): number[] {
-  const parts = text.split(/[\s,;]+/).filter(Boolean);
-  const values = parts.map(Number);
-  const bad = parts.find((_, i) => !Number.isFinite(values[i]));
-  if (bad !== undefined) throw new Error(`"${bad}" is not a number`);
-  return values;
-}
-
-const fmt = (n: number) => String(Number(n.toPrecision(4)));
-
-/** A plain-language reading of the result, using the wording in messages.ts. */
-function explain(result: TestResult, kind: Kind, mu: number): string[] {
-  const quantity = messages.quantity[kind];
-  const claim = messages.claim[result.alternative ?? "two-sided"](quantity, mu);
-  const p = result.pValue < 0.001 ? messages.pVerySmall : fmt(result.pValue);
-  const [low, high] = result.confidenceInterval!;
-  const level = `${fmt(result.confidenceLevel! * 100)}%`;
-  return [
-    messages.estimate(fmt(result.estimate!)),
-    messages.pValue(quantity, mu, p),
-    result.pValue < 0.05 ? messages.significant(claim) : messages.notSignificant(claim, mu),
-    low === -Infinity
-      ? messages.intervalAtMost(level, quantity, fmt(high))
-      : high === Infinity
-        ? messages.intervalAtLeast(level, quantity, fmt(low))
-        : messages.intervalBetween(level, quantity, fmt(low), fmt(high)),
-  ];
-}
+import { Field, ValidDataNote } from "@/components/demo-ui";
+import { explainResult } from "@/lib/explain";
+import { parseNumbers } from "@/lib/format";
+import { quantity, type Kind } from "./messages";
 
 /** The statinfer code that reproduces the result, showing only non-default options. */
 function codeFor(kind: Kind, x: number[], y: number[], mu: number, alternative: Alternative, confidence: number) {
@@ -107,7 +80,7 @@ export function TTestDemo({ children }: { children: React.ReactNode }) {
       });
       return {
         result,
-        explanation: explain(result, kind, muValue),
+        explanation: explainResult(result, quantity[kind], muValue),
         code: codeFor(kind, x, y, muValue, alternative, confidenceLevel),
       };
     } catch (e) {
@@ -144,57 +117,49 @@ export function TTestDemo({ children }: { children: React.ReactNode }) {
   );
 }
 
-const field = { display: "grid", gap: "0.25rem" } as const;
-
 /** The inputs. */
 export function TTestForm() {
   const s = useTTest();
   return (
-    <div style={{ display: "grid", gap: "1rem", maxWidth: "40rem" }}>
-      <label style={field}>
-        Test
+    <div className="demo-form">
+      <Field label="Test">
         <select value={s.kind} onChange={(e) => s.changeKind(e.target.value as Kind)}>
           <option value="one-sample">One-sample</option>
           <option value="paired">Paired</option>
           <option value="welch">Two-sample (Welch)</option>
           <option value="pooled">Two-sample (pooled variance)</option>
         </select>
-      </label>
+      </Field>
 
-      <label style={field}>
-        {s.kind === "one-sample" ? "Sample" : "First sample (x)"}
+      <Field label={s.kind === "one-sample" ? "Sample" : "First sample (x)"}>
         <textarea rows={3} value={s.xText} onChange={(e) => s.setXText(e.target.value)} />
-      </label>
+      </Field>
 
       {s.kind !== "one-sample" && (
-        <label style={field}>
-          Second sample (y)
+        <Field label="Second sample (y)">
           <textarea rows={3} value={s.yText} onChange={(e) => s.setYText(e.target.value)} />
-        </label>
+        </Field>
       )}
 
-      <label style={field}>
-        {s.kind === "one-sample" ? "Hypothesised mean" : "Hypothesised difference (x − y)"}
+      <Field label={s.kind === "one-sample" ? "Hypothesised mean" : "Hypothesised difference (x − y)"}>
         <input type="number" step="any" value={s.mu} onChange={(e) => s.setMu(e.target.value)} />
-      </label>
+      </Field>
 
-      <label style={field}>
-        Alternative hypothesis
+      <Field label="Alternative hypothesis">
         <select value={s.alternative} onChange={(e) => s.setAlternative(e.target.value as Alternative)}>
           <option value="two-sided">Two-sided: different, in either direction</option>
           <option value="less">Less: lower than the hypothesised value</option>
           <option value="greater">Greater: higher than the hypothesised value</option>
         </select>
-      </label>
+      </Field>
 
-      <label style={field}>
-        Confidence level
+      <Field label="Confidence level">
         <select value={s.confidence} onChange={(e) => s.setConfidence(e.target.value)}>
           <option value="0.9">90%</option>
           <option value="0.95">95%</option>
           <option value="0.99">99%</option>
         </select>
-      </label>
+      </Field>
     </div>
   );
 }
@@ -214,7 +179,7 @@ export function TTestResults() {
 /** The plain-language explanation. */
 export function TTestMeaning() {
   const { outcome } = useTTest();
-  if ("error" in outcome) return <p className="muted">{messages.needsValidData}</p>;
+  if ("error" in outcome) return <ValidDataNote />;
   return (
     <>
       {outcome.explanation.map((sentence) => (
@@ -227,14 +192,14 @@ export function TTestMeaning() {
 /** The JavaScript code that reproduces the result. */
 export function TTestCode() {
   const { outcome } = useTTest();
-  if ("error" in outcome) return <p className="muted">{messages.needsValidData}</p>;
+  if ("error" in outcome) return <ValidDataNote />;
   return <pre>{outcome.code}</pre>;
 }
 
 /** The raw result object, as JSON, in a collapsible box. */
 export function TTestJson() {
   const { outcome } = useTTest();
-  if ("error" in outcome) return <p className="muted">{messages.needsValidData}</p>;
+  if ("error" in outcome) return <ValidDataNote />;
   return (
     <details>
       <summary>Show the raw result as JSON</summary>

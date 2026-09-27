@@ -220,3 +220,15 @@ body {
 .muted {
   color: var(--muted);
 }
+
+/* Demo forms */
+.demo-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 40rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.25rem;
+}
