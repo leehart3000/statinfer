@@ -185,8 +185,8 @@ importers:
         specifier: 19.3.0
         version: 19.3.0(react@19.3.0)
       statinfer:
-        specifier: ^0.1.1
-        version: 0.1.1
+        specifier: ^0.1.2
+        version: 0.1.2
     devDependencies:
       '@types/mdx':
         specifier: ^2.0.14
@@ -2120,8 +2120,8 @@ packages:
   stable-hash@0.0.5:
     resolution: {integrity: sha512-+L3ccpzibovGXFK+Ap/f8LOS0ahMrHTf3xu7mMLSpEGU0EO9ucaysSylKo9eRDFNhWve/y275iPmIZ4z39a9iA==}
 
-  statinfer@0.1.1:
-    resolution: {integrity: sha512-1d1pfvRgqybwm55eIp8TOb61HJmJVReFzcHuDlsfNMkitx8oPncAxIabdmtJyhkcuoSj8RzPSxtRJzvL3ppeSw==}
+  statinfer@0.1.2:
+    resolution: {integrity: sha512-FwMwgjKYiMVfMvfWNU7M3wWLHGa+GYEZ4z/wRIH6TeZPiv2hmiVtiNiI3/52Rl3k3iolcaSU8nF0EoAOjMd5NQ==}
     engines: {node: '>=22'}
 
   stop-iteration-iterator@1.1.0:
@@ -4723,7 +4723,7 @@ snapshots:
 
   stable-hash@0.0.5: {}
 
-  statinfer@0.1.1: {}
+  statinfer@0.1.2: {}
 
   stop-iteration-iterator@1.1.0:
     dependencies:

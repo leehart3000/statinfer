@@ -93,15 +93,16 @@ Every test is checked against SciPy or statsmodels to about 10 decimal places. T
 
 ## Roadmap
 
-### v0.1
+### v0.1 (released)
 - `tTest`, `proportionTest`, `chiSquareTest`, `correlationTest`, `anova`, `fishersExactTest`
 - `summarize` for readable output
+- An [interactive demo site](https://statinfer.vercel.app/) and [API documentation](https://leehart3000.github.io/statinfer/)
 
-### Stretch goals
+### Next
 - `wilcoxonTest`: rank-sum and signed-rank
 - `kruskalWallisTest`
 
-### v0.2
+### Later
 - `linearRegression`
 - Tukey HSD post-hoc tests for `anova`
 - Conditional odds ratio and exact confidence interval for `fishersExactTest`
