@@ -20,7 +20,7 @@ export default function Home() {
         JavaScript code that reproduces it.
       </p>
       <h2>Which test should I use?</h2>
-      <p>Answer a question or two, and the guide will point you to the right test.</p>
+      <p>Answer the following questions, and this wizard will try to point you in the right direction:</p>
       <TestGuide />
       <h2>Demos</h2>
       <ul>
