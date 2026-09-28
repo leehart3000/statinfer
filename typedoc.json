@@ -4,6 +4,7 @@
   "out": "api-docs",
   "name": "statinfer",
   "customCss": "./typedoc.css",
+  "ignoredHighlightLanguages": ["mermaid"],
   "treatWarningsAsErrors": true,
   "validation": {
     "notDocumented": true

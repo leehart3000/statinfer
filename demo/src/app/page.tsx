@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { demos } from "@/demos";
+import TestGuide from "@/components/test-guide";
 
 export default function Home() {
   return (
@@ -18,6 +19,9 @@ export default function Home() {
         Each demo runs statinfer in your browser, explains the result in plain language, and shows the
         JavaScript code that reproduces it.
       </p>
+      <h2>Which test should I use?</h2>
+      <p>Answer the following questions, and this wizard will try to point you in the right direction:</p>
+      <TestGuide />
       <h2>Demos</h2>
       <ul>
         {demos.map((demo) => (
