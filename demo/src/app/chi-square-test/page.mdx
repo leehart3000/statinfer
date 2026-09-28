@@ -20,7 +20,7 @@ A chi-square test works with **counts**: how many things fall into each category
 - **Independence:** given a table of counts, are the rows and columns related? For example, with rows for two age groups and columns for preferring tea or coffee, does preference depend on age?
 - **Goodness-of-fit:** do the counts in each category match the proportions you expected? For example, after 100 rolls of a four-sided die, do the counts fit a fair die, where each side comes up equally often?
 
-The test relies on an approximation that needs reasonably large counts. A common rule of thumb is an **expected** count of at least 5 in each cell. For 2×2 tables with small counts, Fisher's exact test is more reliable. For 2×2 tables, statinfer applies **Yates' continuity correction** by default, like SciPy and R, which makes the test slightly more cautious. You can turn it off in the demo.
+The test relies on an approximation that needs reasonably large counts. A common rule of thumb is an **expected** count of at least 5 in each cell. For 2×2 tables with small counts, [Fisher's exact test](/fishers-exact-test) is more reliable. For 2×2 tables, statinfer applies **Yates' continuity correction** by default, like SciPy and R, which makes the test slightly more cautious. You can turn it off in the demo.
 
 ## Demo data
 

@@ -33,4 +33,9 @@ export const demos: Demo[] = [
     title: "ANOVA",
     summary: "Compare the averages of three or more groups at once.",
   },
+  {
+    slug: "fishers-exact-test",
+    title: "Fisher's exact test",
+    summary: "Test a 2×2 table of counts exactly, even when the counts are small.",
+  },
 ];

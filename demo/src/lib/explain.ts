@@ -3,19 +3,20 @@ import { fmt } from "./format";
 import { messages } from "./messages";
 
 /**
- * Plain-language sentences for a result that has an estimate and a p-value,
- * plus a confidence interval if the test provides one. `quantity` names what's
+ * Plain-language sentences for a result with a p-value, plus an estimate and a
+ * confidence interval when the test provides them. `quantity` names what's
  * being estimated (e.g. "true mean"), and `hypothesised` is the value it's
  * being tested against.
  */
 export function explainResult(result: TestResult, quantity: string, hypothesised: number): string[] {
   const claim = messages.claim[result.alternative ?? "two-sided"](quantity, hypothesised);
   const p = result.pValue < 0.001 ? messages.pVerySmall : fmt(result.pValue);
-  const sentences = [
-    messages.estimate(fmt(result.estimate!)),
+  const sentences: string[] = [];
+  if (result.estimate !== null) sentences.push(messages.estimate(fmt(result.estimate)));
+  sentences.push(
     messages.pValue(quantity, hypothesised, p),
     result.pValue < 0.05 ? messages.significant(claim) : messages.notSignificant(claim, hypothesised),
-  ];
+  );
 
   if (result.confidenceInterval !== null && result.confidenceLevel !== null) {
     const [low, high] = result.confidenceInterval;

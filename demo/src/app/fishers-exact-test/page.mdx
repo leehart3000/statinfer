@@ -1,0 +1,66 @@
+import { DemoCode, DemoJson, DemoMeaning, DemoResults } from "@/components/demo-outcome";
+import { FisherDemo, FisherForm } from "./fisher-demo";
+
+export const metadata = { title: "Fisher's exact test demo" };
+
+# Fisher's exact test demo
+
+[statinfer](https://www.npmjs.com/package/statinfer) is a JavaScript package for statistical tests, with TypeScript types included. It runs in Node.js and in the browser.
+
+This page demonstrates its `fishersExactTest` function, which tests whether the rows and columns of a 2×2 table of counts are related. Enter your own counts below: statinfer calculates the result right here in your browser, explains what it means, and shows the JavaScript code that produces it.
+
+**On this page:** [When to use Fisher's exact test](#when-to-use-fisher-s-exact-test) · [Demo data](#demo-data) · [Demo results](#demo-results) · [What the results mean](#what-the-results-of-fisher-s-exact-test-mean) · [How to use it](#how-to-use-statinfer-s-fisher-s-exact-test-in-your-javascript-code) · [Further reading](#further-reading)
+
+<FisherDemo>
+
+## When to use Fisher's exact test
+
+Fisher's exact test answers the same question as a [chi-square test](/chi-square-test) of independence on a 2×2 table: are the rows and columns related? For example, does a treatment (rows: treated or not) affect recovery (columns: recovered or not)?
+
+The difference is that it doesn't rely on an approximation. It works out the exact probability of every possible table with the same row and column totals. That makes it reliable **even when the counts are small**, where the chi-square test and the [proportion test](/proportion-test) can be misleading.
+
+The demo starts with the experiment Fisher invented the test for. A colleague claimed she could taste whether milk had been poured into a cup before or after the tea. She was given 8 cups, 4 of each, and correctly identified 3 of the 4 "milk first" cups. The rows are the true order, and the columns are her guesses. Could she really tell, or was she guessing? Notice that with only 8 cups, even a very good performance isn't strong evidence.
+
+The **odds ratio** measures the strength of the relationship: 1 means no relationship, and larger values mean the diagonal counts (top left and bottom right) are bigger than you'd expect.
+
+## Demo data
+
+<FisherForm />
+
+## Demo results
+
+<DemoResults />
+
+Fisher's exact test has no statistic like t or chi-square. It's based directly on the top-left count, so that's what the table's **statistic** shows. The **estimate** is the odds ratio in your table: (top left × bottom right) ÷ (top right × bottom left).
+
+## What the results of Fisher's exact test mean
+
+<DemoMeaning />
+
+## How to use statinfer's Fisher's exact test in your JavaScript code
+
+Install statinfer from npm:
+
+```sh
+npm install statinfer
+```
+
+This JavaScript code reproduces the result above. It also works unchanged in TypeScript, where statinfer's built-in types give you autocompletion and type checking.
+
+<DemoCode />
+
+For every option `fishersExactTest` accepts, see [its API documentation](https://leehart3000.github.io/statinfer/functions/fishersExactTest.html).
+
+### The raw result
+
+`fishersExactTest` returns a plain JavaScript object, which your code can use directly. For example, `result.estimate` is the odds ratio. Below, the same object is shown as **JSON** (JavaScript Object Notation), a standard text format for data, which you can save or send to other programs. The odds ratio is `Infinity` when only the bottom half of its fraction is zero, and `null` when it's undefined. There's no confidence interval yet: an exact interval for the odds ratio is planned for a future version.
+
+<DemoJson />
+
+## Further reading
+
+- [How can we determine whether two processes produce the same proportion of defectives?](https://itl.nist.gov/div898/handbook/prc/section3/prc33.htm), which includes Fisher's exact test, in the NIST/SEMATECH e-Handbook of Statistical Methods
+- [Fisher's exact test](https://en.wikipedia.org/wiki/Fisher%27s_exact_test), on Wikipedia, which also tells the story of the lady tasting tea
+- [Odds ratio](https://en.wikipedia.org/wiki/Odds_ratio), on Wikipedia
+
+</FisherDemo>
