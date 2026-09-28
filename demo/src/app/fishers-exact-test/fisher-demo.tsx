@@ -6,7 +6,7 @@ import { OutcomeProvider, type Outcome } from "@/components/demo-outcome";
 import { Field } from "@/components/demo-ui";
 import { explainResult } from "@/lib/explain";
 import { parseNumber } from "@/lib/format";
-import { quantity } from "./messages";
+import { oddsRatioNotes, quantity } from "./messages";
 
 type Table = [[number, number], [number, number]];
 
@@ -64,12 +64,15 @@ export function FisherDemo({ children }: { children: React.ReactNode }) {
         [c!, d!],
       ];
       const result = fishersExactTest({ table, alternative });
-      return {
-        result,
-        // "No association" means an odds ratio of 1.
-        explanation: explainResult(result, quantity, 1),
-        code: codeFor(table, alternative),
-      };
+      // "No association" means an odds ratio of 1.
+      let explanation = explainResult(result, quantity, 1);
+      if (result.estimate === null) {
+        explanation = [oddsRatioNotes.undefined, ...explanation];
+      } else if (result.estimate === Infinity) {
+        // Replace the generic "The estimate … is Infinity." sentence.
+        explanation = [oddsRatioNotes.infinite, ...explanation.slice(1)];
+      }
+      return { result, explanation, code: codeFor(table, alternative) };
     } catch (e) {
       return { error: e instanceof Error ? e.message : String(e) };
     }
