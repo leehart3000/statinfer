@@ -28,4 +28,9 @@ export const demos: Demo[] = [
     title: "chi-square test",
     summary: "Test counts in categories: whether two factors are related, or whether counts match expected proportions.",
   },
+  {
+    slug: "anova",
+    title: "ANOVA",
+    summary: "Compare the averages of three or more groups at once.",
+  },
 ];

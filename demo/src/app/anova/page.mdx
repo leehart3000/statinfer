@@ -1,0 +1,65 @@
+import { DemoCode, DemoJson, DemoMeaning, DemoResults } from "@/components/demo-outcome";
+import { AnovaDemo, AnovaForm } from "./anova-demo";
+
+export const metadata = { title: "ANOVA demo" };
+
+# ANOVA demo
+
+[statinfer](https://www.npmjs.com/package/statinfer) is a JavaScript package for statistical tests, with TypeScript types included. It runs in Node.js and in the browser.
+
+This page demonstrates its `anova` function, which compares the averages of several groups at once. Enter your own groups of numbers below: statinfer calculates the result right here in your browser, explains what it means, and shows the JavaScript code that produces it.
+
+**On this page:** [When to use ANOVA](#when-to-use-anova) · [Demo data](#demo-data) · [Demo results](#demo-results) · [What the results mean](#what-the-results-of-anova-mean) · [How to use it](#how-to-use-statinfer-s-anova-in-your-javascript-code) · [Further reading](#further-reading)
+
+<AnovaDemo>
+
+## When to use ANOVA
+
+A one-way **ANOVA** (analysis of variance) asks whether **three or more groups have the same average**. For example: do three fertilisers give the same average plant height, or do students taught with four different methods get the same average score? For just two groups, use the [t-test](/t-test) instead.
+
+It works by comparing two kinds of variation: how far apart the group averages are (**between** groups), and how spread out the values are inside each group (**within** groups). If the averages are far apart compared with the spread inside each group, the groups probably differ.
+
+ANOVA works best when the values are independent, roughly bell-shaped within each group, and similarly spread out in every group. For skewed data or outliers, the Kruskal-Wallis test is more reliable, and it's planned for a future version of statinfer.
+
+A significant result tells you that **at least one** group's average differs, but not which one. Follow-up ("post-hoc") tests such as Tukey's HSD answer that, and are also planned.
+
+## Demo data
+
+<AnovaForm />
+
+## Demo results
+
+<DemoResults />
+
+The **statistic** is the F statistic: the between-group variation divided by the within-group variation. The larger it is, the more the group averages differ relative to the spread inside each group. An ANOVA has two **degrees of freedom**: the first comes from the number of groups, and the second from the total number of values.
+
+## What the results of ANOVA mean
+
+<DemoMeaning />
+
+## How to use statinfer's ANOVA in your JavaScript code
+
+Install statinfer from npm:
+
+```sh
+npm install statinfer
+```
+
+This JavaScript code reproduces the result above. It also works unchanged in TypeScript, where statinfer's built-in types give you autocompletion and type checking.
+
+<DemoCode />
+
+For every option `anova` accepts, see [its API documentation](https://leehart3000.github.io/statinfer/functions/anova.html).
+
+### The raw result
+
+`anova` returns a plain JavaScript object, which your code can use directly. For example, `result.pValue` is the p-value, and `result.df` is a pair of numbers, `[between, within]`. Below, the same object is shown as **JSON** (JavaScript Object Notation), a standard text format for data, which you can save or send to other programs. ANOVA has no estimate, confidence interval or direction, so those fields are `null`.
+
+<DemoJson />
+
+## Further reading
+
+- [One-way ANOVA calculations](https://itl.nist.gov/div898/handbook/prc/section4/prc434.htm), in the NIST/SEMATECH e-Handbook of Statistical Methods, which works through an example step by step
+- [One-way analysis of variance](https://en.wikipedia.org/wiki/One-way_analysis_of_variance), on Wikipedia
+
+</AnovaDemo>
