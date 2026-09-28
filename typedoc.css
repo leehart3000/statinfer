@@ -3,3 +3,9 @@
 .tsd-typography > h1:first-child {
   display: none;
 }
+
+/* TypeDoc can't draw Mermaid diagrams, so hide their source code. The README
+   links to an interactive version of the same guide instead. */
+.tsd-typography pre:has(code.mermaid) {
+  display: none;
+}

@@ -6,6 +6,8 @@ Statistical inference for modern JavaScript and TypeScript.
 
 statinfer provides classic hypothesis tests with one consistent result format, full TypeScript types, and results checked against SciPy and statsmodels. It has no runtime dependencies, and bundlers only include the tests you import.
 
+**Try every test in your browser** at [statinfer.vercel.app](https://statinfer.vercel.app/), with plain-language explanations of the results.
+
 ## Install
 
 ```sh
@@ -61,6 +63,29 @@ Every test takes a single options object and returns a `TestResult`:
 Full details of every function and option are in the [API documentation](https://leehart3000.github.io/statinfer/).
 
 Fields that don't apply to a test are `null`, so every result has the same shape. One-sided tests can have an infinite interval end; note that `JSON.stringify` saves `Infinity` as `null`.
+
+## Which test should I use?
+
+```mermaid
+flowchart TD
+  A{What kind of data?} -->|Measurements, like heights or scores| B{What are you comparing?}
+  A -->|Counts, or yes/no outcomes| C{What are you comparing?}
+  B -->|One group with a target value| T1[tTest: one-sample]
+  B -->|The same subjects measured twice| T2[tTest: paired]
+  B -->|Two separate groups| T3[tTest: Welch]
+  B -->|Three or more groups| AN[anova]
+  B -->|Whether two measurements move together| CO[correlationTest]
+  C -->|One proportion with a target value| P1[proportionTest: one sample]
+  C -->|Two groups' proportions| P2{Small counts?}
+  P2 -->|No| P3[proportionTest: two samples]
+  P2 -->|Yes| F[fishersExactTest]
+  C -->|A table of counts| TB{A 2×2 table with small counts?}
+  TB -->|No| CS[chiSquareTest: independence]
+  TB -->|Yes| F
+  C -->|Counts against expected proportions| GF[chiSquareTest: goodness-of-fit]
+```
+
+"Small counts" roughly means fewer than 10 successes or failures in a group, or any cell of a table below about 5. There's also an [interactive version of this guide](https://statinfer.vercel.app/) on the demo site.
 
 ## Accuracy
 

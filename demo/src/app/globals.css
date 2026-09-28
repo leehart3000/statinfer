@@ -253,3 +253,40 @@ body {
   color: var(--fg);
   text-decoration-thickness: 2px;
 }
+
+/* The "which test should I use?" guide */
+.guide {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.guide-question {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+.guide-answers {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-answers button {
+  width: 100%;
+  background: var(--bg);
+  text-align: left;
+}
+
+.guide-answers button:hover {
+  border-color: var(--link);
+}
+
+.guide-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
